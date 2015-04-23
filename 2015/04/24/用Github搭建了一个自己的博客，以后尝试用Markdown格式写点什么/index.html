@@ -208,7 +208,7 @@
   
     <div class="article-meta">
       <a href="/2015/04/24/用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么/" class="article-date">
-  	<time datetime="2015-04-23T16:28:56.000Z" itemprop="datePublished">2015-04-24</time>
+  	<time datetime="2015-04-23T16:32:27.000Z" itemprop="datePublished">2015-04-24</time>
 </a>
     </div>
   
@@ -233,8 +233,10 @@
 <li><p>写文章命令 <code>hexo n &quot;标题名&quot;</code>，会自动在Source文件夹下的_post文件夹下建一个md格式的文档，用sublime打开编辑。</p>
 </li>
 <li><p>修改根目录下的_config.yml文件，配置git发布地址，博客名称等信息。</p>
-<p><code>deploy:<br>type: github<br>repository: <a href="https://github.com/username/usernmae.github.io.git" target="_blank" rel="external">https://github.com/username/usernmae.github.io.git</a><br>branch: master<br></code></p>
+<p> deploy:<br> type: github<br> repository: <a href="https://github.com/username/usernmae.github.io.git" target="_blank" rel="external">https://github.com/username/usernmae.github.io.git</a><br> branch: master</p>
 </li>
+</ol>
+<ol>
 <li><p>运行命令 <code>hexo d</code>就发布到github了。</p>
 </li>
 <li><p>为了支持域名绑定，需要在source目录下建一个名字叫 CNAME的文件，里面写上你要绑定的域名，比如我的 <a href="http://xiexiefa.com" target="_blank" rel="external">xiexiefa.com</a>,域名那边只需要建一个CNAME记录，指向 username.github.io(不要加http://)</p>
