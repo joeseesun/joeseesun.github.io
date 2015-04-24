@@ -259,9 +259,21 @@ Markdown 是一种轻量级标记语言，创始人为 John Gruber 和 Aaron Swa
 <li>在 GitHub 等环境中有很好的应用；</li>
 <li>是编写文档、记录笔记、撰写文章的合适选择。</li>
 </ul>
+<a id="more"></a>
 <p>3.Markdown 完全兼容 HTML 语法，可以直接写HTML：</p>
-<p><pre><br>    <table><br>      <tr><br>            <td>1</td><br>            <td>2</td><br>        </tr><br>        <tr><br>            <td>3</td><br>            <td>4</td><br>        </tr><br>    </table><br></pre></p>
-<table><br>  <tr><br>        <td>1</td><br>        <td>2</td><br>    </tr><br>    <tr><br>        <td>3</td><br>        <td>4</td><br>    </tr><br></table>
+<pre><code><span class="tag">&lt;<span class="title">pre</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">table</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">tr</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>1<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>2<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">tr</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>3<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>4<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">table</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">pre</span>&gt;</span>
+</code></pre><table><br>  <tr><br>        <td>1</td><br>        <td>2</td><br>    </tr><br>    <tr><br>        <td>3</td><br>        <td>4</td><br>    </tr><br></table>
 
 <h2 id="一、段落与换行">一、段落与换行</h2><p>1.段落的前后必须是空行：</p>
 <p>空行指的是行内什么都没有，或者只有空白符（空格或制表符）</p>
@@ -269,7 +281,6 @@ Markdown 是一种轻量级标记语言，创始人为 John Gruber 和 Aaron Swa
 <p>2.如果需要在段落内强制加入换行（<code>&lt;br /&gt;</code>）：</p>
 <p>可以在前一行的末尾加入至少两个空格<br>然后换行写其它的文字</p>
 <p>3.Markdown 中的多数区块都需要在两个空行之间。</p>
-<a id="more"></a>
 <h2 id="二、标题">二、标题</h2><h3 id="1-Setext_形式">1.Setext 形式</h3><h1 id="H1">H1</h1><h2 id="H2">H2</h2><p>= 和 - 的数量是没有限制的。通常的做法是使其和标题文本的长度相同，这样看起来比较舒服。</p>
 <h3 id="2-atx_形式">2.atx 形式</h3><p>① 可以用对称的 # 包括文本：</p>
 <h1 id="H1-1">H1</h1><p>② 也可以只在左边使用 #：</p>
@@ -336,7 +347,7 @@ Markdown 是一种轻量级标记语言，创始人为 John Gruber 和 Aaron Swa
 <p><a href="http://www.google.com/" title="Google" target="_blank" rel="external">Google</a></p>
 <h3 id="3-自动链接">3.自动链接</h3><p>使用 &lt;> 包括的 URL 或邮箱地址会被自动转换为超链接：</p>
 <p><a href="http://www.google.com/" target="_blank" rel="external">http://www.google.com/</a></p>
-<p><a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x31;&#x32;&#x33;&#x40;&#101;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x31;&#x32;&#x33;&#x40;&#101;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;</a></p>
+<p><a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#49;&#50;&#x33;&#64;&#x65;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#49;&#50;&#x33;&#64;&#x65;&#109;&#x61;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
 <p>该方式适合行内较短的链接，会使用 URL 作为链接文字。邮箱地址会自动编码，以逃避抓取机器人。</p>
 <h2 id="八、图片">八、图片</h2><p>插入图片的语法和插入超链接的语法基本一致，也分为行内式和参考式两种。</p>
 <h3 id="1-行内式-1">1.行内式</h3><p>直接来看例子：</p>
