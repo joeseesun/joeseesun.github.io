@@ -957,7 +957,8 @@ a {
 }
 .article-entry p {
   margin-top: 12px;
-  font-size: 18px;
+  font-size: 16px;
+  color: #777;
 }
 .article-entry p code,
 .article-entry li code {
