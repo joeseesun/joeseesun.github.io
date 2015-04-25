@@ -142,6 +142,7 @@ body {
   background: #fff;
   color: rgba(0,0,0,0.6);
   -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 h1,
 h2,
@@ -959,6 +960,7 @@ a {
   margin-top: 12px;
   font-size: 16px;
   color: #888;
+  font-family: serif;
 }
 .article-entry p code,
 .article-entry li code {
