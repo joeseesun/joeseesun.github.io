@@ -275,7 +275,7 @@ a {
   }
   #container .header-author.fixed {
     position: fixed;
-    top: -13px;
+    top: 0px;
     width: 100%;
     color: #ddd;
   }
@@ -467,8 +467,7 @@ a {
 .header-author {
   text-align: center;
   margin: 0.67em 0;
-  font-family: Roboto, "Roboto", serif;
-  font-size: 30px;
+  font-size: 18px;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -ms-transition: 0.3s;
@@ -997,7 +996,7 @@ a {
 }
 .article-entry ul,
 .article-entry ol {
-  font-size: 14px;
+  font-size: 16px;
   margin: 10px 0px;
 }
 .article-entry li ul,
@@ -1645,8 +1644,8 @@ pre .javascript .function {
   text-align: center;
 }
 #page-nav .page-number {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   background: #4d4d4d;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -1654,7 +1653,7 @@ pre .javascript .function {
   border-radius: 50%;
   display: inline-block;
   color: #fff;
-  line-height: 20px;
+  line-height: 40px;
   margin: 0 3px 30px;
 }
 #page-nav .page-number:hover {
