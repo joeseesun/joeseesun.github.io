@@ -970,6 +970,7 @@ a {
   border: 1px solid #ccc;
   font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
   word-wrap: break-word;
+  font-size: 14px;
 }
 .article-entry blockquote {
   background: #ddd;
