@@ -1,0 +1,2756 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[乔木记录]]></title>
+  <subtitle><![CDATA[热爱分享，永远好奇，不添麻烦]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://xiexiefa.com/"/>
+  <updated>2015-05-02T16:45:57.000Z</updated>
+  <id>http://xiexiefa.com/</id>
+  
+  <author>
+    <name><![CDATA[向阳乔木]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Git命令学习记录]]></title>
+    <link href="http://xiexiefa.com/2015/05/02/Git%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/05/02/Git命令学习记录/</id>
+    <published>2015-05-02T07:12:09.000Z</published>
+    <updated>2015-05-02T16:45:57.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="Git学习">Git学习</h2><h3 id="安装完成后的配置命令：">安装完成后的配置命令：</h3><blockquote>
+<p>$ git config —global user.name “Your Name”<br>$ git config —global user.email “email@example.com”</p>
+</blockquote>
+<h3 id="小贴士：">小贴士：</h3><blockquote>
+<p>ls -ah 显示隐藏文件夹.git命令</p>
+<p>git diff HEAD — filename 查看工作区的版本与最新版本库版本的文件区别</p>
+<p>git reset即可回退版本，也可以把暂存区的修改退回到工作区，用HEAD时表示最新版本。</p>
+<p>Git跟踪的是修改而不是文件。</p>
+<p>创建SSH的操作命令：<br>ssh-keygen -t rsa -C “youremail@example.com”<br>生成位置在用户主目录下的.ssh文件夹下，有id_rsa 和 id_ras.pub两个文件。</p>
+<p>git remote add origin git@github.com:yougithubusername/youreponame.git 添加远程库<br>如果第一次往空的github推送，推送命令 git push -u origin master让本地库与远程建立关联，以后可以去掉-u参数。</p>
+<p>查看远程分支详情命令  <code>git remote -v</code>,会显示远程库的完整访问地址，而不是名称.</p>
+<p><code>git config --global color.ui true</code>  可以让git显示语法高亮。</p>
+<p><code>.gitignore</code>用于忽略某些文件和文件夹，支持通配符。目录结尾斜杠不能省略，否则就是忽略文件。</p>
+</blockquote>
+<h3 id="Git版本恢复">Git版本恢复</h3><blockquote>
+<p>git reset —hard head^   恢复到上个版本</p>
+<p>git reset —hard head^^  恢复到上上个版本 </p>
+<p>git reset —hard commit_id   恢复到某个版本</p>
+<p>git reflog  记录所有的命令历史，便于恢复到任意版本</p>
+<p>git log —pretty=oneline  记录历史commit，方便恢复到某个commit版本。</p>
+</blockquote>
+<h3 id="Git的操作流">Git的操作流</h3><blockquote>
+<p>git add filename -&gt;  git commit -m “description” -&gt; git push origin master</p>
+</blockquote>
+<h3 id="Git的工作方式理解（个人理解）">Git的工作方式理解（个人理解）</h3><ul>
+<li><p>直接能看到的文件所在区叫“工作区”。</p>
+</li>
+<li><p><code>./git</code>里的是版本库，包含了暂存区和Head版本区</p>
+</li>
+<li><p>每次<code>git add</code> 是为了把工作区的文件放到暂存区跟踪版本。</p>
+</li>
+<li><p>每次<code>git commit</code> 是为了把暂存区的内容放到真正的版本区里。</p>
+</li>
+<li><p>每次<code>git push</code> 是为了把本地的代码推上线</p>
+</li>
+</ul>
+<h3 id="Git完整操作流程测试">Git完整操作流程测试</h3><ol>
+<li><p>本地建个文件夹 justtest.</p>
+</li>
+<li><p>进入文件夹后输入  <code>git init</code> 初始化本地仓库。</p>
+</li>
+<li><p>vi test.md 创建个文件随便输入点东西。<code>:wq!</code>保存退出。</p>
+</li>
+<li><p><code>git add test.md</code> </p>
+</li>
+<li><p><code>git commit -m &quot;justtest&quot;</code></p>
+</li>
+<li><p>Github建立一个空的库，比如我命名为<code>justtest</code>,生成的地址为：<code>git@github.com:joeseesun/justtest.git</code> </p>
+</li>
+<li><p>添加远程库  <code>git remote add origin git@github.com:joeseesun/justtest.git</code></p>
+</li>
+<li><p>推送本地库到远程：<code>git push -u origin master</code></p>
+</li>
+<li><p>打开github你的justtest仓库，应该就可以看到test.md文件。</p>
+</li>
+</ol>
+<h3 id="Git_分支操作">Git 分支操作</h3><ul>
+<li><p>查看分支 <code>git branch</code></p>
+</li>
+<li><p>创建分支 <code>git branch &lt;branchname&gt;</code></p>
+</li>
+<li><p>切换分支 <code>git checkout &lt;branchname&gt;</code></p>
+</li>
+<li><p>删除分支 <code>git branch -d &lt;branchname&gt;</code></p>
+</li>
+<li><p>合并其他分支到当前分支  <code>git merge &lt;branchname&gt;</code></p>
+</li>
+<li><p>创建并切换到新分支 <code>git checkout -b &lt;branchname&gt;</code></p>
+</li>
+<li><p>删除远程分支 <code>git push origin :&lt;branchname&gt;</code>  原理推一个空分支上去，相对于删除，冒号不能少。</p>
+</li>
+<li><p>强行删除未合并分支 <code>git branch -D &lt;branchname&gt;</code></p>
+</li>
+</ul>
+<h3 id="Git分支冲突合并">Git分支冲突合并</h3><ul>
+<li><p>如果新建的分支和主分支都做了修改并且commit，<code>git merge &lt;branchname&gt;</code>命令会造成文件冲突，必须修改后add和commit</p>
+</li>
+<li><p><code>git log --graph</code>可以查看分支合并图,<code>git log --pretty=oneline --graph --abbrev-commit</code> 显示更简洁的合并图。</p>
+</li>
+<li><p>git的默认使用fast-foward分支合并模式，缺点是删除分之后会丢掉分支历史信息。使用<code>--no-ff</code>参数可以禁用fast-foward模式。</p>
+</li>
+<li><p>如果修复bug，可以创建bug分支去处理，但是当前工作还没完成的情况下，可以使用<code>git stash</code>命令去记录当前分支的工作区。修复合并完bug分支后，在之前的工作区使用<code>git stash pop</code>来恢复工作区并删除快照（如果单独操作命令是 <code>git stash apply</code>,恢复命令是<code>git stash drop</code>）,查看工作区快照命令 <code>git stash list</code>。</p>
+</li>
+</ul>
+<h3 id="Git标签">Git标签</h3><ul>
+<li><p><code>git tag &lt;tagname&gt;</code>用于新建标签，默认为<code>HEAD</code>,也可以指定Commit id。</p>
+</li>
+<li><p><code>git tag -a &lt;tagname&gt; -m &quot;description&quot;</code>写标签信息</p>
+</li>
+<li><p><code>git show &lt;tagname&gt;</code> 来看具体tag的内容</p>
+</li>
+<li><p><code>git push origin &lt;tagname&gt;</code> 推送一个标签到远程</p>
+</li>
+<li><p><code>git push origin --tags</code> 推送所有标签到远程</p>
+</li>
+<li><p><code>git tag -d &lt;tagname&gt;</code> 本地删除一个标签</p>
+</li>
+<li><p><code>git push origin :refs/tags/&lt;tagname&gt;</code> 远程删除一个标签</p>
+</li>
+</ul>
+<h3 id="Git命令配置别名">Git命令配置别名</h3><ul>
+<li><p><code>git config --global alias.st status</code>  将<code>git status</code>简化为<code>git st</code>;</p>
+</li>
+<li><p><code>git config --global alias.ci commit</code>  将<code>git commit</code>简化为<code>git ci</code>;</p>
+</li>
+<li><p><code>git config --global alias.co checkout</code>  将<code>git checkout</code>简化为<code>git co</code>;</p>
+</li>
+<li><p><code>git config --global alias.br branch</code>  将<code>git branch</code>简化为<code>git br</code>;</p>
+</li>
+<li><p><code>git config --global alias.last &#39;log -1&#39;</code> 显示最近一次commit信息;</p>
+</li>
+<li><p><code>git config --global alias.unstage &#39;reset HEAD&#39;</code>  将<code>git reset HEAD</code>简化为<code>git unstage</code>;</p>
+</li>
+<li><p><code>git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;</code>  图形分支图着色</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="Git学习">Git学习</h2><h3 id="安装完成后的配置命令：">安装完成后的配置命令：</h3><blockquote>
+<p>$ git config —global user.name “Your Name”<br>$ git config —gl]]>
+    </summary>
+    
+      <category term="git" scheme="http://xiexiefa.com/tags/git/"/>
+    
+      <category term="github" scheme="http://xiexiefa.com/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年5月1日）]]></title>
+    <link href="http://xiexiefa.com/2015/05/01/20150501%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/05/01/20150501乔木阅读记录/</id>
+    <published>2015-05-01T07:12:09.000Z</published>
+    <updated>2015-05-01T15:49:02.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>放假的意义：一个说不起就不起的早晨、一个说不睡就不睡的深夜和一个说不出门就不出门的白天。</p>
+</li>
+<li><p>你说喜欢雨，下雨时打着伞；你说喜欢太阳，阳光明媚时躲到阴凉处；你说喜欢风，起风时却关上窗户；</p>
+</li>
+<li><p>不用避开车马喧嚣，只需心中修篱种菊。</p>
+</li>
+<li><p>不要对爱你的人太刻薄，这辈子真正对你好的人也没有几个。</p>
+</li>
+<li><p>如果别人真的想给你，直接会塞你手里，根本不会问你要不要。</p>
+</li>
+<li><p>别为不属于你的观众，表演不擅长的人生。</p>
+</li>
+<li><p>不解释的才叫从容，不执著的才叫看破，不完美的才叫人生。</p>
+</li>
+<li><p>认为世界是公平的这恰恰是个错误的世界观。</p>
+</li>
+<li><p>当你纯粹是出于责任和义务去做这件事，你才是真正自由的，这才是真正的道德。</p>
+</li>
+<li><p>只有出于任性 （也就是自由意志） 而去做一件事，才是真正的自由选择。</p>
+</li>
+<li><p>量化自我的目的是成为自己生活的科学家。</p>
+</li>
+<li><p>最理想的班级人数应该在18到24人之间。</p>
+</li>
+<li><p>维护现有的社会格局和强调遵守游戏规则，那是高富帅的事，而犯规则是屌丝的特权。</p>
+</li>
+<li><p>世界上有两种人，一种人想赢，一种人想赢得争论。</p>
+</li>
+<li><p>认为凡事都有个目的，是普通人思维区别于科学思维的根本之一。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>放假的意义：一个说不起就不起的早晨、一个说不睡就不睡的深夜和一个说不出门就不出门的白天。</p>
+</li>
+<li><p>你说喜欢雨，下雨时打着伞；你说喜欢太阳，阳光明媚时躲到阴凉处；你说喜欢风，起风时却关上窗户；</p>
+</li>
+<li><p>不用]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年4月30日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/30/20150430%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/30/20150430乔木阅读记录/</id>
+    <published>2015-04-30T07:12:09.000Z</published>
+    <updated>2015-04-30T15:47:07.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>要有计划、要执着，也要有弹性、懂取舍。</p>
+</li>
+<li><p>当你把成功看作理所当然时，竞争对手就随时准备打败你。</p>
+</li>
+<li><p>一切职业成功都取决于你的雇主、客户以及同盟是不是愿意购买你的时间。</p>
+</li>
+<li><p>如果市场不存在，再聪明也没用。</p>
+</li>
+<li><p>ABZ规划：A计划，B计划，Z指的是退路。</p>
+</li>
+<li><p>陌生人的目标都可以成为你的目标触发点，这叫“目标感染”。</p>
+</li>
+<li><p>奖励、威胁、监视、期限等都可能破坏内在动力。</p>
+</li>
+<li><p>生活中的大部分目标都是在无意识情况下制定的。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>要有计划、要执着，也要有弹性、懂取舍。</p>
+</li>
+<li><p>当你把成功看作理所当然时，竞争对手就随时准备打败你。</p>
+</li>
+<li><p>一切职业成功都取决于你的雇主、客户以及同盟是不是愿意购买你的时间。</p>
+</li>
+<li]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年4月29日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/29/20150429%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/29/20150429乔木阅读记录/</id>
+    <published>2015-04-29T07:12:09.000Z</published>
+    <updated>2015-04-29T13:47:57.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>金字塔法则：任何事情都可以归纳出一个中心论点，而此中心论点可由三至七个论据支持，这些一级论据本身也可以是个论点，被二级的三至七个论据支持，如此延伸，状如金字塔。</p>
+</li>
+<li><p>技术的进步到一定阶段，突破就从偶然事件变成了必然事件。</p>
+</li>
+<li><p>哈伯因为发明制氨法获得了1918年的诺贝尔奖。</p>
+</li>
+<li><p>谈进化不谈灭绝，谈市场不谈破产的，都是文艺小清新。</p>
+</li>
+<li><p>创新，也许是坚持自由市场的唯一理由。</p>
+</li>
+<li><p>大多数人谈创新都是叶公好龙，在局面很不错的情况下没人真的喜欢改变。</p>
+</li>
+<li><p>创新的代价除了烧钱冒险，还包括让伟大的公司死亡，还包括容忍坏东西出现。</p>
+</li>
+<li><p>你所谓的手机生活，不过是把同一群朋友随身携带。</p>
+</li>
+<li><p>互联网时代引起的争论交锋，是提升容忍度的过程。</p>
+</li>
+<li><p>要么解决连接问题，要么解决生物体连接时的排异冲突问题。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>金字塔法则：任何事情都可以归纳出一个中心论点，而此中心论点可由三至七个论据支持，这些一级论据本身也可以是个论点，被二级的三至七个论据支持，如此延伸，状如金字塔。</p>
+</li>
+<li><p>技术的进步到一定阶段，突破就从偶然事件变成了必然事件。</p]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年4月28日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/28/20150428%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/28/20150428乔木阅读记录/</id>
+    <published>2015-04-28T07:12:09.000Z</published>
+    <updated>2015-04-28T18:01:01.000Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://7xiqni.com1.z0.glb.clouddn.com/Rectangle 1 + 写.png" alt=""></p>
+<ul>
+<li><p>不要构想成功画面，要构想成功的步骤，这才是现实的乐观。</p>
+</li>
+<li><p>越来越发现看道理时都懂得，劝别人时都明白，到自己做时仍然像个白痴。</p>
+</li>
+<li><p>概念无意义，只是为了更好朗朗上口更好传播，真正有意义的是它们背后的推演过程、知识原型。</p>
+</li>
+<li><p>把不现实的目标换成能给你带来使命感和归属感的目标。</p>
+</li>
+<li><p>把表扬留给真实、执行到位、令你真心感叹的成就。</p>
+</li>
+<li><p>焦点小组不适用于参与者对面前的产品的一无所知或并不熟悉的情况。</p>
+</li>
+<li><p>Tinder用右划表示喜欢她（图片头像）、左划为不喜欢；如果恰巧对方也喜欢你，那么你们可以互发消息。</p>
+</li>
+<li><p>微信文章点赞数和阅读数的比例大概在3‰——5‰之间。</p>
+</li>
+<li><p>情感化是一个文案设计的高级目标，但是要确保主要的信息能传达和表述到位。</p>
+</li>
+<li><p>界面文案写作要点：表明好处（如：折扣，优惠额度，返现）；加入“动作”（如：抢购，发现，去，遇见等）；提一个问题，契合用户心中的那个“说话人”（如：“忘记密码了？”）；</p>
+</li>
+<li><p>尽量让信息对称，提供更多必要信息，让用户有明确的预期。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://7xiqni.com1.z0.glb.clouddn.com/Rectangle 1 + 写.png" alt=""></p>
+<ul>
+<li><p>不要构想成功画面，要构想成功的步骤，这才是现实的乐观。</p>
+</li>
+<li><p]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年4月27日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/27/20150427%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/27/20150427乔木阅读记录/</id>
+    <published>2015-04-27T07:12:09.000Z</published>
+    <updated>2015-04-27T16:07:37.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>孩子们自发有序的、专注的活动都被称为“工作”，输出的是操作技能的提升、与环境联系能力的完善、和充分的内心满足感，区分于漫无目的的“玩耍”。</p>
+</li>
+<li><p>当你想得到更多精力和动力避免诱惑时，用“为什么”方式思考；当你做一件困难、生疏或耗时间的事时，请用“是什么”方式思考。</p>
+</li>
+<li><p>最佳的目标应该是权衡“合意度”和“可行性”之后做出没有偏见的选择。</p>
+</li>
+<li><p>制定目标时，一定要同时想到成功的情景和路上的障碍。</p>
+</li>
+<li><p>当我们相信自己在某些方面无法改变时便会追求那些只着重于带给自己面子的目标。</p>
+</li>
+<li><p>尽可能多的把任务交给潜意识，一个目标必须对你有吸引力，你的潜意识才会采纳它。</p>
+</li>
+<li><p>质疑现有观念，从零开始重新审视自己所从事的业务。</p>
+</li>
+<li><p>若想保持动力，让你的环境里充满提示和触发点。</p>
+</li>
+<li><p>当你追求“表现”目标时，你会成为“自我应验预言”的受害者。</p>
+</li>
+<li><p>尽可能把“表现”目标转换成“进步”目标，从“能证明什么”转化为“能学到什么”。</p>
+</li>
+<li><p>有些人会被英雄事迹所影响，而另一些会被有说服力的警戒性故事所影响。</p>
+</li>
+<li><p>当人们觉得自己有选择权时会更有动力，自由选择对身心健康和快乐起到巨大作用。</p>
+</li>
+<li><p>奖励对于那些与内在动力无关的目标来说永远有效，但对内在动力可能有破坏。</p>
+</li>
+<li><p>满足人类对关联感、胜任力与自主权的三种基本需求才能带给我们想要的快乐与幸福。</p>
+</li>
+<li><p>如果你想让上帝发笑，请告诉他你的各种计划。虽然是嘲笑计划，但提前准备非常重要。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>孩子们自发有序的、专注的活动都被称为“工作”，输出的是操作技能的提升、与环境联系能力的完善、和充分的内心满足感，区分于漫无目的的“玩耍”。</p>
+</li>
+<li><p>当你想得到更多精力和动力避免诱惑时，用“为什么”方式思考；当你做一件困难、生疏或耗]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年4月26日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/26/20150426%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/26/20150426乔木阅读记录/</id>
+    <published>2015-04-26T07:12:09.000Z</published>
+    <updated>2015-04-27T16:06:42.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>问为什么，可以激发斗志，问是什么，可以专注执行。</p>
+</li>
+<li><p>人们潜意识里喜欢给自己的偶像安排想象中得生活。</p>
+</li>
+<li><p>“前途是光明的，道路是曲折的。”这句话听起来像笑话，其实是事实。</p>
+</li>
+<li><p>不要把不同功能的按钮设计得一样，摆得太近。</p>
+</li>
+<li><p>一切错都是设计者的错，用户不必感到自己很蠢，责怪自己。</p>
+</li>
+<li><p>产品的迭代过程总是从简单到复杂，再回归简单。</p>
+</li>
+<li><p>听用户的反馈，但别听信他们的反馈。</p>
+</li>
+<li><p>看一个电影300遍也可以成为达人，1万小时定律不欺我。</p>
+</li>
+<li><p>现在的115网盘是阉割迅雷的最佳代替品。</p>
+</li>
+<li><p>淘宝上卖的DIY动铁耳机可能会严损听力。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>问为什么，可以激发斗志，问是什么，可以专注执行。</p>
+</li>
+<li><p>人们潜意识里喜欢给自己的偶像安排想象中得生活。</p>
+</li>
+<li><p>“前途是光明的，道路是曲折的。”这句话听起来像笑话，其实是事实。</p>
+</li>
+<l]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年4月25日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/25/20150425%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/25/20150425乔木阅读记录/</id>
+    <published>2015-04-25T07:12:09.000Z</published>
+    <updated>2015-04-27T06:46:50.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>看着对方的眼睛，感受他的内心，是否跟你一样对这件事充满热情和期待。</p>
+</li>
+<li><p>你眼中的康庄大道可能是布满地雷的胡志明小路。</p>
+</li>
+<li><p>创业需要非常聪明的正常人。</p>
+</li>
+<li><p>每次新技术的产生都诞生了一批新的“大平台”，大平台产生之后又会产生出一些垂直小平台，然后成长为大平台。</p>
+</li>
+<li><p>好的商业模式至少有两个特点：清晰、可扩展。</p>
+</li>
+<li><p>别忽视了你身边的小朋友,他们就是你未来的大牛。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>看着对方的眼睛，感受他的内心，是否跟你一样对这件事充满热情和期待。</p>
+</li>
+<li><p>你眼中的康庄大道可能是布满地雷的胡志明小路。</p>
+</li>
+<li><p>创业需要非常聪明的正常人。</p>
+</li>
+<li><p>每次新技术的]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（2015年4月24日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/24/20150424%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/24/20150424乔木阅读记录/</id>
+    <published>2015-04-24T03:55:08.000Z</published>
+    <updated>2015-04-24T16:22:46.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>很多时候，创业者其实都是叶公而已。真的龙出现了，根本无法直面。</p>
+</li>
+<li><p>创始人要尝试着培养自己的远见，而不是整天想着做几年把公司卖掉，然后做投资去！</p>
+</li>
+<li><p>迈出这一步之后，一切都将不同，且再也不可能回头了，回头不是岸。</p>
+</li>
+<li><p>因为事实上你根本无法管理时间，所以你就去管理自己罢。</p>
+</li>
+<li><p>先清空自己，全盘接纳，而后思考，最终提炼合理结论.</p>
+</li>
+<li><p>信息不透明就要增加信息的丰富性，信息不对称就要求信息的有效性。</p>
+</li>
+<li><p>下一代招聘网站应该着重解决管理招聘方和求职者双方的期望。</p>
+</li>
+<li><p>不要总想着让对方欠下感情的负债。</p>
+</li>
+<li><p>从心底里站在对方角度考虑问题，真正的无条件为对方着想，才能真正的让人舒服。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>很多时候，创业者其实都是叶公而已。真的龙出现了，根本无法直面。</p>
+</li>
+<li><p>创始人要尝试着培养自己的远见，而不是整天想着做几年把公司卖掉，然后做投资去！</p>
+</li>
+<li><p>迈出这一步之后，一切都将不同，且再也不可能回头]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Markdown语法学习记录]]></title>
+    <link href="http://xiexiefa.com/2015/04/24/Markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/24/Markdown语法学习记录/</id>
+    <published>2015-04-24T01:44:09.000Z</published>
+    <updated>2015-04-24T05:27:57.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="关于Markdown">关于Markdown</h2><p>1.<a href="http://zh.wikipedia.org/wiki/Markdown" title="Wiki: Markdown" target="_blank" rel="external">Wiki: Markdown</a></p>
+<blockquote>
+<p>Markdown 是一种轻量级标记语言，创始人为 John Gruber 和 Aaron Swartz。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML）文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。</p>
+</blockquote>
+<p>2.优点如下：</p>
+<ul>
+<li>它方便修改和发布；</li>
+<li>很容易转换为 HTML 代码；</li>
+<li>有众多语言及应用的相关扩展；</li>
+<li>在 GitHub 等环境中有很好的应用；</li>
+<li>是编写文档、记录笔记、撰写文章的合适选择。</li>
+</ul>
+<a id="more"></a>
+<p>3.Markdown 完全兼容 HTML 语法，可以直接写HTML：</p>
+<pre><code><span class="tag">&lt;<span class="title">pre</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">table</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">tr</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>1<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>2<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">tr</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>3<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">td</span>&gt;</span>4<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">table</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">pre</span>&gt;</span>
+</code></pre><table><br>  <tr><br>        <td>1</td><br>        <td>2</td><br>    </tr><br>    <tr><br>        <td>3</td><br>        <td>4</td><br>    </tr><br></table>
+
+<h2 id="一、段落与换行">一、段落与换行</h2><p>1.段落的前后必须是空行：</p>
+<p>空行指的是行内什么都没有，或者只有空白符（空格或制表符）</p>
+<p>相邻两行文本，如果中间没有空行<br>会显示在一行中（换行符被转换为空格）</p>
+<p>2.如果需要在段落内强制加入换行（<code>&lt;br /&gt;</code>）：</p>
+<p>可以在前一行的末尾加入至少两个空格<br>然后换行写其它的文字</p>
+<p>3.Markdown 中的多数区块都需要在两个空行之间。</p>
+<h2 id="二、标题">二、标题</h2><h3 id="1-Setext_形式">1.Setext 形式</h3><h1 id="H1">H1</h1><h2 id="H2">H2</h2><p>= 和 - 的数量是没有限制的。通常的做法是使其和标题文本的长度相同，这样看起来比较舒服。</p>
+<h3 id="2-atx_形式">2.atx 形式</h3><p>① 可以用对称的 # 包括文本：</p>
+<h1 id="H1-1">H1</h1><p>② 也可以只在左边使用 #：</p>
+<h1 id="H1-2">H1</h1><h2 id="H2-1">H2</h2><h3 id="H3">H3</h3><h4 id="H4">H4</h4><h5 id="H5">H5</h5><h6 id="H6">H6</h6><p>③ 成对的 # 左侧和只在左边使用的 # 左侧都不可以有任何空白，但其内侧可以使用空白。</p>
+<h3 id="左侧使用了空格">左侧使用了空格</h3><h4 id="内侧使用了空格">内侧使用了空格</h4><h2 id="三、引用">三、引用</h2><blockquote>
+<p>1.引用内容</p>
+<p>2.多行内容<br>可以在每行前加入 ></p>
+<p>2.如果仅在第一行使用 >，<br>后面相邻的行即使省略 >，也会变成引用内容</p>
+<p>3.也可以在引用中</p>
+<blockquote>
+<p>使用嵌套的引用</p>
+</blockquote>
+<p>4.或者在引用中<br>使用其他 <em>Markdown</em> 语法</p>
+</blockquote>
+<h2 id="四、列表">四、列表</h2><h3 id="1-无序列表">1.无序列表</h3><ul>
+<li>可以使用 * 作为标记</li>
+</ul>
+<ul>
+<li>也可以使用 +</li>
+</ul>
+<ul>
+<li>或者 -</li>
+</ul>
+<h3 id="2-有序列表">2.有序列表</h3><ol>
+<li>有序列表以数字和 . 开始；</li>
+<li>数字的序列并不会影响生成的列表序列；</li>
+<li>但仍然推荐按照自然顺序（1.2.3…）编写。</li>
+</ol>
+<h3 id="3-相关事项">3.相关事项</h3><ol>
+<li>无序列表项的开始是：符号 空格；</li>
+<li>有序列表项的开始是：数字 . 空格；</li>
+<li>空格至少为一个，多个空格将被解析为一个；</li>
+<li>如果仅需要在行前显示数字和 .：</li>
+</ol>
+<p>05. 可以使用：数字 \. 来取消显示为列表</p>
+<h2 id="五、代码区块">五、代码区块</h2><p>1.可以使用缩进来插入代码块：</p>
+<pre><code><span class="tag">&lt;<span class="title">html</span>&gt;</span> // Tab开头
+    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Markdown<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span>  // 四个空格开头
+</code></pre><p>代码块前需要有至少一个空行，且每行代码前需要有至少一个 Tab 或四个空格；</p>
+<p>2.也可以通过 ``，插入行内代码（` 是 Tab 键上边、数字 1 键左侧的那个按键）：</p>
+<p>例如 <code>&lt;title&gt;Markdown&lt;/title&gt;</code></p>
+<p>3.代码块中的文本（包括 Markdown 语法）都会以原格式显示，而特殊字符会被转换为 HTML 实体。</p>
+<h1 id="六、分隔线">六、分隔线</h1><p>1.可以在一行中使用三个或更多的 *、- 或 _ 产生分隔线：</p>
+<h2 id="*"><em>*</em></h2><hr>
+<p>2.多个 * 之间可以有空格（空白符），但不能有其他字符：</p>
+<hr>
+<hr>
+<h2 id="七、链接">七、链接</h2><h3 id="1-行内式">1.行内式</h3><p>① 普通链接：</p>
+<p><a href="http://www.google.com/" target="_blank" rel="external">Google</a></p>
+<p>② 指向本地文件的链接：</p>
+<p><a href="./image/icon.png">icon.png</a></p>
+<p>③ 包含 title 的链接:</p>
+<p><a href="http://www.google.com/" title="Google" target="_blank" rel="external">Google</a></p>
+<h3 id="2-参考式">2.参考式</h3><p>参考式链接的写法相当于行内式拆分成两部分，并通过一个 <em>识别符</em> 来连接两部分。参考式能尽量保持文章结构的简单，也方便统一管理 URL。</p>
+<p>① 首先，定义链接：</p>
+<p><a href="http://www.google.com/" title="Google" target="_blank" rel="external">Google</a></p>
+<p>第二个方括号内为链接独有的 <em>识别符</em>，可以是字母、数字、空白或标点符号。识别符是 <em>不区分大小写</em> 的；</p>
+<p>② 然后定义链接内容：</p>
+<p>其格式为：[识别符] : 空白符 URL title</p>
+<p>其中，URL可以使用 &lt;> 包括起来，title 可以使用 “”、’’、() 包括（考虑到兼容性，建议使用 “”），title 部分也可以换行；</p>
+<p>链接内容的定义可以放在同一个文件的 <em>任意位置</em>；</p>
+<p>③ 也可以省略 <em>识别符</em>，使用链接文本作为 <em>识别符</em>：</p>
+<p><a href="http://www.google.com/" title="Google" target="_blank" rel="external">Google</a></p>
+<h3 id="3-自动链接">3.自动链接</h3><p>使用 &lt;> 包括的 URL 或邮箱地址会被自动转换为超链接：</p>
+<p><a href="http://www.google.com/" target="_blank" rel="external">http://www.google.com/</a></p>
+<p><a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#49;&#50;&#51;&#64;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;">&#49;&#50;&#51;&#64;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;</a></p>
+<p>该方式适合行内较短的链接，会使用 URL 作为链接文字。邮箱地址会自动编码，以逃避抓取机器人。</p>
+<h2 id="八、图片">八、图片</h2><p>插入图片的语法和插入超链接的语法基本一致，也分为行内式和参考式两种。</p>
+<h3 id="1-行内式-1">1.行内式</h3><p>直接来看例子：</p>
+<p><img src="https://avatars2.githubusercontent.com/u/3265208?v=3&amp;s=100" alt="GitHub" title="GitHub,Social Coding"></p>
+<p>方括号中的部分是图片的替代文本，括号中的 title 部分和链接一样，是可选的。</p>
+<h3 id="2-参考式-1">2.参考式</h3><p>直接来看例子：</p>
+<p><img src="https://avatars2.githubusercontent.com/u/3265208?v=3&amp;s=100" alt="GitHub" title="GitHub,Social Coding"></p>
+<h3 id="3-指定图片的显示大小">3.指定图片的显示大小</h3><p>目前，Markdown 还不支持指定图片的显示大小，不过可以通过直接插入<code>&lt;img /&gt;</code>标签来指定相关属性：</p>
+<p><img src="https://avatars2.githubusercontent.com/u/3265208?v=3&s=100" alt="GitHub" title="GitHub,Social Coding" width="50" height="50"></p>
+<h2 id="九、强调">九、强调</h2><p>1.使用 ** 或 __ 包括的文本会被转换为<code>&lt;em&gt;&lt;/em&gt;</code>，通常表现为斜体：</p>
+<p>这是用来<em>演示</em>的<em>文本</em></p>
+<p>2.使用 **** 或 ____ 包括的文本会被转换为<code>&lt;strong&gt;&lt;/strong&gt;</code>，通常表现为加粗：</p>
+<p>这是用来<strong>演示</strong>的<strong>文本</strong></p>
+<p>3.用来包括文本的 * 或 _ 内侧不能有空白，否则 * 和 _ 将不会被转换：</p>
+<p>这是用来<em> 演示</em>的<em>文本 </em></p>
+<p>4.如果需要在文本中显示成对的 * 或 _，可以在符号前加入 \ 即可：</p>
+<p>这是用来*演示*的_文本_</p>
+<p>5.*、**、_ 和 __ 都必须 <em>成对使用</em>；</p>
+<h2 id="十、反斜线">十、反斜线</h2><p>反斜线用于插入在 Markdown 语法中有特殊作用的字符。</p>
+<p>这是用来*演示*的_文本_</p>
+<h2 id="十一、编辑器">十一、编辑器</h2><h3 id="1-Windows：">1.Windows：</h3><p>① <a href="http://markdownpad.com/" title="MarkdownPad" target="_blank" rel="external">MarkdownPad</a></p>
+<p>一个非常优秀的 Markdown 编辑器，提供了多文件编辑、实时预览、自定义样式、文件导出等功能，和 Linux 中的 ReTeX 较为类似，提供了全功能的免费版和具有扩展功能的高级付费版。（这篇文章就是在 MarkdownPad 中完成的，它刚刚更新了 2.0 版本，而且我也基本完成了新版的简体中文翻译工作，估计不久后，大家就可以用上中文版了。）</p>
+<p>Update：在 2013-03-11 日，MarkdownPad 2.1.4 的升级中包含了简体中文，参考 <a href="http://markdownpad.com/news/2013/new-languages-zh-CH-and-pt-PT/" title="News and Updates" target="_blank" rel="external">MarkdownPad 2 now speaks Chinese and Portuguese!</a>。</p>
+<p>Update：在 2013-04-18 日，MarkdownPad 2.1.13 的升级中解决了我所提交的 Bug——无法全文渲染。参考 <a href="http://markdownpad.com/news/2013/version-2.1.13/" title="News and Updates" target="_blank" rel="external">MarkdownPad 2.1.13 Released</a>。</p>
+<p>② <a href="http://www.texts.io/" title="Texts" target="_blank" rel="external">Texts</a></p>
+<p>一个所见即所得的 Markdown 编辑器，不过无法直接编辑 Markdown 文件，只能在 HTML 预览中进行编辑，功能稍差一些，不过可以免费试用。</p>
+<p>③ <a href="http://code52.org/DownmarkerWPF/" title="MarkPad" target="_blank" rel="external">Markpad</a></p>
+<p>一个 Win8 UI 风格的 Markdown 编辑器，提供实时预览和导出导入到博客的功能，但不提供导出到 HTML 文件的功能，不过它是完全免费的。</p>
+<p>④<a href="http://www.mdcharm.com/" title="MdCharm" target="_blank" rel="external">MdCharm</a></p>
+<p>类似于 MarkdownPad 的 Markdown 编辑器，使用 Qt 开发，支持 Windows 和 Linux 平台，可免费试用，比 MarkdownPad 更加轻巧，比 Retext 更加强大。</p>
+<p>⑤ <a href="http://mike-ward.net/markdownedit/" title="Markdown Edit" target="_blank" rel="external">Markdown Edit</a></p>
+<p>简单高效的 Markdown 编辑器，没有工具栏和菜单，没有多标签支持，但所有操作都可以通过快捷键完成。</p>
+<h3 id="2-Linux：">2.Linux：</h3><p>① <a href="http://sourceforge.net/p/retext/home/ReText/" title="ReText" target="_blank" rel="external">ReText</a></p>
+<p>开源的 Markdown 编辑器，功能强大，包含简体中文，Linux 中最好用的 Markdown 编辑器。不过，编辑窗口和预览窗口好像没法同步滚动。</p>
+<h3 id="3-Mac：">3.Mac：</h3><p>① <a href="http://mouapp.com/" title="Mou" target="_blank" rel="external">Mou</a></p>
+<p>强大而优秀的 Markdown 编辑器。</p>
+<p>② <a href="http://macromates.com/" title="TextMate" target="_blank" rel="external">TextMate</a></p>
+<h3 id="4-基于_Web：">4.基于 Web：</h3><p>① <a href="http://dillinger.io/" title="Dillinger" target="_blank" rel="external">Dillinger</a></p>
+<p>强大的 Web Markdown 编辑器，功能不亚于 MarkdownPad 和 ReTeX，而且支持与 GitHub 和 Dropbox 相连接。</p>
+<p>② <a href="http://markable.in/editor/" title="Markable" target="_blank" rel="external">Markable</a></p>
+<p>③ <a href="http://mahua.jser.me/" title="MaHua" target="_blank" rel="external">MaHua</a></p>
+<p>④ <a href="https://www.zybuluo.com/mdeditor" title="cmd-editor" target="_blank" rel="external">cmd-editor</a></p>
+<h3 id="5-其它：">5.其它：</h3><p>还有许多其它的软件和平台都有相应的扩展或插件支持，如：</p>
+<ul>
+<li>Submline Text: <a href="http://ttscoff.github.com/MarkdownEditing/" title="MarkdownEditing" target="_blank" rel="external">MarkdownEditing</a></li>
+<li>gedit: <a href="http://www.jpfleury.net/en/software/gedit-markdown.php" title="gedit-markdown" target="_blank" rel="external">gedit-markdown</a></li>
+<li>Eclipse: <a href="http://www.winterwell.com/software/markdown-editor.php" title="Markdown Editor plugin" target="_blank" rel="external">Markdown Editor plugin</a></li>
+<li>IntelliJ IDEA: <a href="http://plugins.jetbrains.com/plugin/?id=5970" title="idea-markdown" target="_blank" rel="external">idea-markdown</a></li>
+<li>Wordpress: <a href="http://wordpress.org/extend/plugins/wp-markdown/" title="WP-Markdown" target="_blank" rel="external">WP-Markdown</a></li>
+</ul>
+<h2 id="十二、参考资料">十二、参考资料</h2><ol>
+<li><a href="http://daringfireball.net/projects/markdown/" title="Project Markdown" target="_blank" rel="external">Project Markdown</a></li>
+<li><a href="https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md" title="Markdown Syntax zh_TW" target="_blank" rel="external">Markdown Syntax zh_TW</a></li>
+<li><a href="http://wowubuntu.com/markdown/" title="Markdown Syntax CN" target="_blank" rel="external">Markdown Syntax CN</a></li>
+<li><a href="http://zh.wikipedia.org/zh-cn/Markdown" title="Wiki Markdown" target="_blank" rel="external">Wiki Markdown</a></li>
+<li><a href="http://xbeta.org/wiki/show/Markdown" title="XBeta Wiki Markdown" target="_blank" rel="external">XBeta Wiki Markdown</a></li>
+</ol>
+<h2 id="十三、共享协议">十三、共享协议</h2><p>本文由 <a href="https://github.com/learnshare" title="LearnShare" target="_blank" rel="external">LearnShare</a> 整理并在 <a href="http://zh.wikipedia.org/wiki/Wikipedia:CC" title="Wiki: CC" target="_blank" rel="external">CC BY-SA 3.0</a> 协议下发布，主要为了给自己和各位朋友作为学习 Markdown 的入门及参考资料。</p>
+<p>请各位遵循 <a href="http://daringfireball.net/projects/markdown/license" title="Markdown: License" target="_blank" rel="external">Markdown: License</a> 及其它参考文献的共享协议来使用、修改和发布。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="关于Markdown">关于Markdown</h2><p>1.<a href="http://zh.wikipedia.org/wiki/Markdown" title="Wiki: Markdown">Wiki: Markdown</a></p>
+<blockquote>
+<p>Markdown 是一种轻量级标记语言，创始人为 John Gruber 和 Aaron Swartz。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的 XHTML（或者 HTML）文档”。这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。</p>
+</blockquote>
+<p>2.优点如下：</p>
+<ul>
+<li>它方便修改和发布；</li>
+<li>很容易转换为 HTML 代码；</li>
+<li>有众多语言及应用的相关扩展；</li>
+<li>在 GitHub 等环境中有很好的应用；</li>
+<li>是编写文档、记录笔记、撰写文章的合适选择。</li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="markdown" scheme="http://xiexiefa.com/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[用Github搭建自己的带域名博客步骤要点]]></title>
+    <link href="http://xiexiefa.com/2015/04/24/%E7%94%A8Github%E6%90%AD%E5%BB%BA%E4%BA%86%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BB%A5%E5%90%8E%E5%B0%9D%E8%AF%95%E7%94%A8Markdown%E6%A0%BC%E5%BC%8F%E5%86%99%E7%82%B9%E4%BB%80%E4%B9%88/"/>
+    <id>http://xiexiefa.com/2015/04/24/用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么/</id>
+    <published>2015-04-23T16:22:15.000Z</published>
+    <updated>2015-04-23T17:05:47.000Z</updated>
+    <content type="html"><![CDATA[<ol>
+<li><p>先注册个GitHub账号，<a href="http://www.github.com" target="_blank" rel="external">http://www.github.com</a></p>
+</li>
+<li><p>在github上新建一个库，注意格式：username.github.io,username就是你的github用户名，只有建立这样的库才可以。</p>
+</li>
+<li><p>本地电脑安装Nodejs和Git，安装hexo命令 <code>npm install hexo -g</code></p>
+</li>
+<li><p>在电脑上建个文件夹，然后运行命令<code>hexo init</code>，然后运行<code>npm install</code></p>
+</li>
+<li><p>输入<code>hexo s</code>,本地的博客就搭建好了，访问地址 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可。</p>
+</li>
+<li><p>写文章命令 <code>hexo n &quot;标题名&quot;</code>，会自动在Source文件夹下的_post文件夹下建一个md格式的文档，用sublime打开编辑。</p>
+</li>
+<li><p>修改根目录下的_config.yml文件，配置git发布地址，博客名称等信息。</p>
+<blockquote>
+<p>deploy:<br> type: github<br> repository: <a href="https://github.com/username/usernmae.github.io.git" target="_blank" rel="external">https://github.com/username/usernmae.github.io.git</a><br> branch: master</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p>运行命令 <code>hexo d</code>就发布到github了。</p>
+</li>
+<li><p>为了支持域名绑定，需要在source目录下建一个名字叫 CNAME的文件，里面写上你要绑定的域名，比如我的 <a href="http://xiexiefa.com" target="_blank" rel="external">xiexiefa.com</a>,域名那边只需要建一个CNAME记录，指向 username.github.io(不要加http://)</p>
+</li>
+<li><p>这样博客就搭建好了。</p>
+</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ol>
+<li><p>先注册个GitHub账号，<a href="http://www.github.com" target="_blank" rel="external">http://www.github.com</a></p>
+</li>
+<li><p>在github上新]]>
+    </summary>
+    
+      <category term="github" scheme="http://xiexiefa.com/tags/github/"/>
+    
+      <category term="技术" scheme="http://xiexiefa.com/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月23日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/23/20150423%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/23/20150423乔木阅读记录/</id>
+    <published>2015-04-22T16:41:24.000Z</published>
+    <updated>2015-04-27T15:56:48.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>之后所有的黑豹主唱和窦唯相比，都像笑话。</p>
+</li>
+<li><p>我特别担心别人说我说得多做得少。做音乐首先要自己认可，其次才是让别人知道。</p>
+</li>
+<li><p>如果周围的环境很温和，那么一个民主型的领导者可能更加有效。</p>
+</li>
+<li><p>大五人格理论由五个纬度组成：外倾性（extraversion）、神经质或情绪稳定性（neuroticism）、开放性（openness）、宜人性 (agreeableness)、尽责性(conscientiousness)。</p>
+</li>
+<li><p>贫穷的人认为富裕就是完全的幸福；孤独的人认为亲密就是最大的欢愉；性缺乏者认为软玉在怀就是最大的幸运。</p>
+</li>
+<li><p>较高的智商；对其领域超越常人的热情和动力；拥有一名特别鼓励他们自主发展的人。</p>
+</li>
+<li><p>你所塑造的社会形象，无形中成了你的负担。虽然，它曾经带给过你另外的福利。</p>
+</li>
+<li><p>任何时候，不要抱怨自己的性格。</p>
+</li>
+<li><p>工具类产品如果达到了自增长，那么营销、推广、品牌则更重要些。</p>
+</li>
+<li><p>移动互联网时代，渠道（各大应用市场、微信）代替了原来的搜索引擎入口。</p>
+</li>
+<li><p>一个完整的创业团队。怎么能少了一条狗呢！于是就有了产品狗、运营狗。</p>
+</li>
+<li><p>可穿戴设备越来越多之后，人与设备的交互不会以视觉为主了。</p>
+</li>
+<li><p>浏览器正在慢慢变化，“需求聚合导入”的核心功能不会变。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>之后所有的黑豹主唱和窦唯相比，都像笑话。</p>
+</li>
+<li><p>我特别担心别人说我说得多做得少。做音乐首先要自己认可，其次才是让别人知道。</p>
+</li>
+<li><p>如果周围的环境很温和，那么一个民主型的领导者可能更加有效。</p>
+<]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月21日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/22/20150421%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/22/20150421乔木阅读记录/</id>
+    <published>2015-04-22T01:44:09.000Z</published>
+    <updated>2015-04-24T05:11:58.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>会制造噪音的团队，才会磨出美丽的石头。</p>
+</li>
+<li><p>顶尖司机与普通司机之间开车速度的差距大概是30%。</p>
+</li>
+<li><p>真正的魔法，是用五千个点子磨出一个产品。</p>
+</li>
+<li><p>到处都缺能多方面掌握一个想法的人才。</p>
+</li>
+<li><p>不要忘了设计流程的目的是为了寻找最棒的答案。</p>
+</li>
+<li><p>当初是对产品的敏锐和创意，让他们独霸市场，后来却因经营人员而消失殆尽。</p>
+</li>
+<li><p>谨记人类是工具的建造者，我们所建造的工具可以大幅增强我们与生俱来的能力。</p>
+</li>
+<li><p>为你的团队选择能够用浅显的语言说明复杂问题的人。</p>
+</li>
+<li><p>童年的故事有助于你评估未来。</p>
+</li>
+<li><p>永远不要期望任何人为你做任何事情，凡事都要靠自己。</p>
+</li>
+<li><p>我的情感告诉我这么做，我是否应该采取相反的行动？</p>
+</li>
+<li><p>你总需要重新连接过去的浪漫。</p>
+</li>
+<li><p>你拥有的任何东西都会跌价，要相信商界和生活中的周期循环。</p>
+</li>
+<li><p>团购带来的用户大部分是价格超敏感人群。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>会制造噪音的团队，才会磨出美丽的石头。</p>
+</li>
+<li><p>顶尖司机与普通司机之间开车速度的差距大概是30%。</p>
+</li>
+<li><p>真正的魔法，是用五千个点子磨出一个产品。</p>
+</li>
+<li><p>到处都缺能多方面掌握]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月22日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/22/20150422%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/22/20150422乔木阅读记录/</id>
+    <published>2015-04-21T16:36:15.000Z</published>
+    <updated>2015-04-27T15:56:27.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>一定要从高质量的源获取信息。</p>
+</li>
+<li><p>更可怕的是，喜欢指手画脚的“砖家”常常是真诚的。</p>
+</li>
+<li><p>让一个不再对公司有任何贡献、甚至可能有副作用的人继续持有公司股票是愚蠢的。</p>
+</li>
+<li><p>雇人的时候，要小心那些对前老板各种抱怨的人。</p>
+</li>
+<li><p>精通你的用户，是最强大的销售工具。</p>
+</li>
+<li><p>人们所谓的某个心愿其实就是他所拥有的梦想的某一部分之体现。</p>
+</li>
+<li><p>把最难的事情交给别人看，妄图让困难、困境自动消失，从来都是弱者一贯的选择。</p>
+</li>
+<li><p>不是每一次跌倒都有人扶着你站起来，通往美好之路并不容易。</p>
+</li>
+<li><p>做人首先要看得起自己，但是不要太看得起。</p>
+</li>
+<li><p>与其夸大事实赢得同情，不如放宽心态让其淡去。</p>
+</li>
+<li><p>所有的知识和经验都是可以拆解为事实、数据和逻辑。</p>
+</li>
+<li><p>不要一面不信鬼神，一面讲究风水。</p>
+</li>
+<li><p>等待比耕耘更辛苦，纵然如此，最好的等待依然是坚持。</p>
+</li>
+<li><p>互联网主战场意味着大市场、强需求、多资金。</p>
+</li>
+<li><p>解释说明战略、目标和执行计划能够让全体员工的行为更加对齐，也能够帮助发现目标和计划的问题。</p>
+</li>
+<li><p>明确地鼓励透明沟通行为，及时纠正封闭沟通行为。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>一定要从高质量的源获取信息。</p>
+</li>
+<li><p>更可怕的是，喜欢指手画脚的“砖家”常常是真诚的。</p>
+</li>
+<li><p>让一个不再对公司有任何贡献、甚至可能有副作用的人继续持有公司股票是愚蠢的。</p>
+</li>
+<li><p]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月20日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/20/20150420%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/20/20150420乔木阅读记录/</id>
+    <published>2015-04-20T01:44:09.000Z</published>
+    <updated>2015-04-24T05:13:09.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>阅读，用自己的话重述，描述自己的相关经验和以后怎么应用。</p>
+</li>
+<li><p>颜色具有瞬间就能感知的优点。</p>
+</li>
+<li><p>当一个领导真诚、坦率、言出必行的时候，信任就出现了，事情就是这么简单。</p>
+</li>
+<li><p>作秀式的演讲和奖励并不能够真正获得团队的心。</p>
+</li>
+<li><p>只有自己敞开心扉，放低自己的姿态，残酷的承认自己的问题，承认团队的问题，才有可能谈得上改进。</p>
+</li>
+<li><p>当面对批评和指责的时候，先冷静下来，仔细听听别人的意见。</p>
+</li>
+<li><p>电子写作中每次键盘的敲击声都在表达着对约翰内斯·古登堡的缅怀。</p>
+</li>
+<li><p>迅速接纳未来趋势，而不是执着于昨天的成功。</p>
+</li>
+<li><p>情感运营是运营的最高境界。</p>
+</li>
+<li><p>“站内维护、站外拉”只是用户运营的一部分，还有内容运营、活动运营、新媒体运营、数据运营等你做。</p>
+</li>
+<li><p>一个产品最终成为何种形态，是需要跟着用户需求、运营的需求、跟着时代趋势不断演进的。</p>
+</li>
+<li><p>请不要认为，享受就是不道德，享受就是享受，只是有些理性有些不够理性而已。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>阅读，用自己的话重述，描述自己的相关经验和以后怎么应用。</p>
+</li>
+<li><p>颜色具有瞬间就能感知的优点。</p>
+</li>
+<li><p>当一个领导真诚、坦率、言出必行的时候，信任就出现了，事情就是这么简单。</p>
+</li>
+<li>]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月19日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/19/20150419%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/19/20150419乔木阅读记录/</id>
+    <published>2015-04-19T01:44:09.000Z</published>
+    <updated>2015-04-24T05:15:30.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>时间管理的关键就是如何将“浪费/闲耗”的时间转化为“投资”的时间，促成有意义的“消费”。</p>
+</li>
+<li><p>为了养成好习惯，哪怕是试用十种方式，也是值得的。</p>
+</li>
+<li><p>对任何事都计算它每小时的价格和费用。</p>
+</li>
+<li><p>只要把握了现状，问题就解决了一半。</p>
+</li>
+<li><p>布鲁克斯定律:软件开发项目如果已经延迟了，再增加人手也不会更快完成，一定会更加延迟。</p>
+</li>
+<li><p>基于自身产品的用户结构，依据用户行为，将所有产品内的用户按照价值高低进行级别划分。</p>
+</li>
+<li><p>EDM不是不好，而是被用滥了，不要发骚扰邮件，用户需要的是精准、有效的内容触达。</p>
+</li>
+<li><p>有机制确保的用户运营才是健康的用户运营。</p>
+</li>
+<li><p>在实体经济疲弱时，不能用货币政策，而要用财政政策，因为发多少货币都不会到实体经济中去。</p>
+</li>
+<li><p>朋友圈热点的时效性仅仅3.6天，社会化营销沦为短平快的快餐式营销。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>时间管理的关键就是如何将“浪费/闲耗”的时间转化为“投资”的时间，促成有意义的“消费”。</p>
+</li>
+<li><p>为了养成好习惯，哪怕是试用十种方式，也是值得的。</p>
+</li>
+<li><p>对任何事都计算它每小时的价格和费用。</p>
+<]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月18日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/18/20150418%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/18/20150418乔木阅读记录/</id>
+    <published>2015-04-18T01:44:09.000Z</published>
+    <updated>2015-04-24T05:17:29.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>在智能手机人口红利消退的情况下，解决单一领域低频需求的产品会逐渐消亡，未来是平台化的互联网状态。</p>
+</li>
+<li><p>移动时代，更贴合用户需求的做法是让他们无明确目的地发现内容。</p>
+</li>
+<li><p>任何一个产品的商业模式都必须是独立的，依附于大平台，你成长的天花板完全取决于别人。</p>
+</li>
+<li><p>万般带不去，唯有业随身。</p>
+</li>
+<li><p>从一小部分人切实需要的东西做起。</p>
+</li>
+<li><p>活在未来，再把缺失的做出来。</p>
+</li>
+<li><p>软件吞噬世界，这个趋势还会持续数十年，学编程是有必要的。</p>
+</li>
+<li><p>迅速接纳未来趋势，而不是执着于昨天的成功，这是确保长期生存的唯一途径。</p>
+</li>
+<li><p>大公司多数忙于保护下金蛋的鹅。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>在智能手机人口红利消退的情况下，解决单一领域低频需求的产品会逐渐消亡，未来是平台化的互联网状态。</p>
+</li>
+<li><p>移动时代，更贴合用户需求的做法是让他们无明确目的地发现内容。</p>
+</li>
+<li><p>任何一个产品的商业模式都必须]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月17日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/17/20150417%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/17/20150417乔木阅读记录/</id>
+    <published>2015-04-17T01:44:09.000Z</published>
+    <updated>2015-04-24T05:19:46.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>爱情三要素:亲密（Intimacy，激情（Passion)，承诺（Commitment）</p>
+</li>
+<li><p>放大你的喋喋不休和你的执迷不悟，将“问题”变成“机会”。</p>
+</li>
+<li><p>就算功能再怎么简单，作为非直接执行者，不要直接去评价，而是尊重和商讨。</p>
+</li>
+<li><p>基于细分人群生活方式和场景黏性的产品，将会是传统产业互联网转型的重要工具。</p>
+</li>
+<li><p>缺乏场景感，没有故事的产品必死无疑。</p>
+</li>
+<li><p>尽量用你自己的话重新解释书中的内容和观点。</p>
+</li>
+<li><p>知识工作者必须成为自己的首席执行官。</p>
+</li>
+<li><p>每当做出重要决定或采取重要行动时，你都可以事先记录下自己对结果的预期。</p>
+</li>
+<li><p>创意只不过是为推土机指引方向，让它知道该到何处掘土。</p>
+</li>
+<li><p>礼貌是一个组织的润滑剂。</p>
+</li>
+<li><p>从无能到平庸要比从一流到卓越需要人们付出多得多的努力。</p>
+</li>
+<li><p>一项计划的时间跨度如果超过了 18个月，就很难做到明确和具体。</p>
+</li>
+<li><p>做什么，从何处着手，如何开始，目标是什么，在多长时间内完成。</p>
+</li>
+<li><p>人们需要找到一个能够有机会成为领袖、受到尊重、取得成功的第二领域。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>爱情三要素:亲密（Intimacy，激情（Passion)，承诺（Commitment）</p>
+</li>
+<li><p>放大你的喋喋不休和你的执迷不悟，将“问题”变成“机会”。</p>
+</li>
+<li><p>就算功能再怎么简单，作为非直接执行者，不]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月16日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/16/20150416%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/16/20150416乔木阅读记录/</id>
+    <published>2015-04-16T01:44:09.000Z</published>
+    <updated>2015-04-24T05:24:05.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>最好的书，是把你已经知道的东西系统告诉你的书。</p>
+</li>
+<li><p>「丧失热情综合症」：毫无顾忌地释放干劲，很快就把干劲用光的人。</p>
+</li>
+<li><p>不要提建议，明确提要求。</p>
+</li>
+<li><p>一个成功的访谈是建立在事先准备好想知道问题的前提下的。</p>
+</li>
+<li><p>有意识减少「我」和「你」的对立区分，建立同伴意识。</p>
+</li>
+<li><p>最好做自己就是用户的产品，因为这样从一开始就起码有一个真实用户。</p>
+</li>
+<li><p>一个会笑，而且能笑自己的人绝不会为了件小事而急躁怀恨。</p>
+</li>
+<li><p>一切的思考质量都来自于思考者是否能够做到“穿过表象看到实质”。</p>
+</li>
+<li><p>真正好的产品会提供一个很好的体验，让你无法想象没有它怎么办。</p>
+</li>
+<li><p>那些最强壮的物种并不一定能最后存活下来，活下来的往往是那些最善于适应环境变化的。</p>
+</li>
+<li><p>终极自由是在任何境遇下能够自主选择精神态度的自由。</p>
+</li>
+<li><p>当你被迫把东西做得很简单时，你就被迫直接面对真正的问题。</p>
+</li>
+<li><p>好设计通常是有点趣味性的设计,好设计是看似容易的设计。</p>
+</li>
+<li><p>大多数做出优美成果的人好像只是为了修正他们眼中丑陋的东西。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>最好的书，是把你已经知道的东西系统告诉你的书。</p>
+</li>
+<li><p>「丧失热情综合症」：毫无顾忌地释放干劲，很快就把干劲用光的人。</p>
+</li>
+<li><p>不要提建议，明确提要求。</p>
+</li>
+<li><p>一个成功的访谈是]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月15日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/15/20150415%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/15/20150415乔木阅读记录/</id>
+    <published>2015-04-15T01:44:09.000Z</published>
+    <updated>2015-04-24T05:29:25.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>你想变多傻，我就让你变多傻，这就是互联网。</p>
+</li>
+<li><p>O2O就两种方式，一个是到店里面去，一个是送上门。</p>
+</li>
+<li><p>交互好并不能让用户去看/去点他不喜欢不感兴趣的内容。</p>
+</li>
+<li><p>在逆境时，才需要真正的领导者，需要他担当起责任，不忽悠大伙，用脑力去想办法，用毅力去坚持。</p>
+</li>
+<li><p>这是最好的时代，这是最坏的时代，这是智慧的时代，这是愚蠢的时代；这是信仰的时期，这是怀疑的时期；这是光明的季节，这是黑暗的季节；这是希望之春，这是失望之冬；人们面前有着各样事物，人们面前一无所有；人们正在直登天堂，人们正在直下地狱。</p>
+</li>
+<li><p>为了更好地理解我们自己的行为和思维，那就学点心理学基础知识吧。</p>
+</li>
+<li><p>永远选择相信比我优秀的人比我努力更多。</p>
+</li>
+<li><p>我们集体怀念的不是Paul，而是无法返回的时光。</p>
+</li>
+<li><p>做产品的主人，做第一个寻找BUG的人，第一个同用户交流的人，第一个担心你做得是否正确的人。</p>
+</li>
+<li><p>据说在Google，最好的产品经理都变得非常热衷于技术。</p>
+</li>
+<li><p>正是因为互联网时代信息过载，所以更要学会分清信息的权重。</p>
+</li>
+<li><p>常规事项要总结出解决方法，然后不断去迭代，加速下次决策的时间。</p>
+</li>
+<li><p>免费的资源因为免费，人们通常都很看轻，不会「物尽其用」。</p>
+</li>
+<li><p>生有涯而知无涯，以有涯逐无涯，殆矣。</p>
+</li>
+<li><p>知识根本不需要对“成功”负责，需要为“成功”负责的是技能。而知识，却能让我们活的更有味道。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>你想变多傻，我就让你变多傻，这就是互联网。</p>
+</li>
+<li><p>O2O就两种方式，一个是到店里面去，一个是送上门。</p>
+</li>
+<li><p>交互好并不能让用户去看/去点他不喜欢不感兴趣的内容。</p>
+</li>
+<li><p>在逆]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月14日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/14/20150414%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/14/20150414乔木阅读记录/</id>
+    <published>2015-04-14T03:55:08.000Z</published>
+    <updated>2015-04-24T05:34:06.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>大多数人对细节的反感, 是因为大方向没有搞清楚。</p>
+</li>
+<li><p>管理公司比开发产品困难，因为代码是有逻辑的，而人却常常失去理智。</p>
+</li>
+<li><p>管理者就像编辑，首要任务是精简问题，消除”歧义”，整合资源。</p>
+</li>
+<li><p>做一个重要的决定时，要从各方的角度去考虑。</p>
+</li>
+<li><p>能被人记住通常是一件荣耀的事。</p>
+</li>
+<li><p>可以拿走一个人的职位，但是不要拿走他的尊严。</p>
+</li>
+<li><p>应该把各个学科的基础理论拿来思考所有重要的问题。</p>
+</li>
+<li><p>当你在表扬一部分人时实际上就是在批评剩下的另一部分人。</p>
+</li>
+<li><p>产品有三种价值：使用价值、体验价值、传播价值。</p>
+</li>
+<li><p>FAB理论：Feature（特点）、Advantages（优点），Benifit（利益点）</p>
+</li>
+<li><p>科学研究表明有效到达数4次，就能让受众记住。</p>
+</li>
+<li><p>幽默亲切拉近人与人的距离，使用场景拉近人与产品的距离，争议拉近人与事件的距离、共鸣拉近人与品牌的距离。</p>
+</li>
+<li><p>垄断、专利、规模、品牌、低成本、高效率、现实扭曲力都是成功公司的护城河。</p>
+</li>
+<li><p>最常见的情商低的表现，就是小看或低估其他人的情商。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>大多数人对细节的反感, 是因为大方向没有搞清楚。</p>
+</li>
+<li><p>管理公司比开发产品困难，因为代码是有逻辑的，而人却常常失去理智。</p>
+</li>
+<li><p>管理者就像编辑，首要任务是精简问题，消除”歧义”，整合资源。</p>
+<]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月13日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/13/20150413%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/13/20150413乔木阅读记录/</id>
+    <published>2015-04-13T03:55:08.000Z</published>
+    <updated>2015-04-24T05:35:28.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>历史和真相不会因某些人的无赖而被抹掉。</p>
+</li>
+<li><p>不要同时做太多需要毅力的事情。</p>
+</li>
+<li><p>送能被『转送出去』的礼，才是好礼，那个共通的「高兴」，才是真正的礼。</p>
+</li>
+<li><p>永远不要问你不想知道答案的问题。</p>
+</li>
+<li><p>搞学术靠的是碌碌无为的白天引发的愧疚感。</p>
+</li>
+<li><p>自从用了萌妹子做阿里旺旺的头像，讲价就越来越好讲了！</p>
+</li>
+<li><p>成年人交往准则的第一条，就是你根本不重要，你不主动点，没什么人在乎你的感受。</p>
+</li>
+<li><p>不竞争容易固步自封，看不到人外有人，就会停滞不前。</p>
+</li>
+<li><p>如果商家为你提供免费服务，那你就不是他们的客户，而是他们的产品。</p>
+</li>
+<li><p>人不会死在绝境，却往往栽在十字路口。</p>
+</li>
+<li><p>优秀的人，不是不合群，而是他们合群的人里面没有你。</p>
+</li>
+<li><p>判断人品要看他坏起来不做什么坏事。</p>
+</li>
+<li><p>酒肉穿肠过，佛祖心中留，世人若学我，如同坠魔道。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>历史和真相不会因某些人的无赖而被抹掉。</p>
+</li>
+<li><p>不要同时做太多需要毅力的事情。</p>
+</li>
+<li><p>送能被『转送出去』的礼，才是好礼，那个共通的「高兴」，才是真正的礼。</p>
+</li>
+<li><p>永远不要问你]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月12日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/12/20150412%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/12/20150412乔木阅读记录/</id>
+    <published>2015-04-12T03:55:08.000Z</published>
+    <updated>2015-04-24T05:36:46.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>时间开销的记录和优化，是从普通员工到管理者的重要能力。</p>
+</li>
+<li><p>让最紧迫的问题正好就是你最想要做的事情。</p>
+</li>
+<li><p>假如一个人伤害了你，你实际上会受伤两次：第一次是伤害本身；第二次是你事后花时间来回想这件事。</p>
+</li>
+<li><p>没有信仰的博才多学和充满信仰的愚昧无知最让人憎恶。</p>
+</li>
+<li><p>很多问题其实就跟感冒一样，自己会好的。</p>
+</li>
+<li><p>一切工作中需要重复的流程，都要简化或优化，直至大家都想都不用想就能做好。</p>
+</li>
+<li><p>当非理性行为的错误成本很低的时候，人们就会放松对自己的要求。</p>
+</li>
+<li><p>所谓的聪明人，就是在积累足够多清楚概念及其关联之后还花很多很多时间去思考、研究未来的人。</p>
+</li>
+<li><p>CPM：付费广告展示1000次的成本。</p>
+</li>
+<li><p>每单支持成本：支持团队一个月内的运营成本除以当月的订单数量。</p>
+</li>
+<li><p>净推荐值：计算需要客户回答一个问题：你有多大可能将我们的产品或品牌推荐给你的朋友或同事？取值范围为0到10。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>时间开销的记录和优化，是从普通员工到管理者的重要能力。</p>
+</li>
+<li><p>让最紧迫的问题正好就是你最想要做的事情。</p>
+</li>
+<li><p>假如一个人伤害了你，你实际上会受伤两次：第一次是伤害本身；第二次是你事后花时间来回想这件事]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月11日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/11/20150411%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/11/20150411乔木阅读记录/</id>
+    <published>2015-04-11T03:55:08.000Z</published>
+    <updated>2015-04-24T05:38:05.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>参与者会给反馈，而围观者不会。</p>
+</li>
+<li><p>软硬件设备的变革带来了用户习惯的迁移。</p>
+</li>
+<li><p>平庸是创造性生产增加带来的必然副作用。</p>
+</li>
+<li><p>创造任何有意义的东西前必然需经历消费和吸收的过程。</p>
+</li>
+<li><p>使用媒介的三种目的：消费、创造与分享</p>
+</li>
+<li><p>任何一个GDP持续增长的国家都会面临群众活动的重新排序。</p>
+</li>
+<li><p>手机代替电视成为解决人们孤独感的工具，下一个是什么？</p>
+</li>
+<li><p>奶昔错误：过于关注产品的属性，而忽略了用户的意图，使用场景。</p>
+</li>
+<li><p>网络让我们获得了与他人联系在一起的接口。</p>
+</li>
+<li><p>任何政府被全世界关注时都显得对本国人民不那么极端了。</p>
+</li>
+<li><p>再愚蠢的创造也是一种创造。</p>
+</li>
+<li><p>一个机构负责解决某个社会问题时，也扮演着保护该问题的角色。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>参与者会给反馈，而围观者不会。</p>
+</li>
+<li><p>软硬件设备的变革带来了用户习惯的迁移。</p>
+</li>
+<li><p>平庸是创造性生产增加带来的必然副作用。</p>
+</li>
+<li><p>创造任何有意义的东西前必然需经历消费和吸收]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月10日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/10/20150410%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/10/20150410乔木阅读记录/</id>
+    <published>2015-04-10T03:55:08.000Z</published>
+    <updated>2015-04-24T06:13:52.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>喜剧作家既要使其人物经受地狱般的折磨，又要使观众确信，那些飘忽的火焰实际上并不烫人。</p>
+</li>
+<li><p>领导需要的能力：勾绘蓝图的能力，让人追随的能力，实现梦想与抱负的能力。</p>
+</li>
+<li><p>领导力不是权利，而是影响力，来源于付出，而不是索取。</p>
+</li>
+<li><p>领导的短、中、长期任务：1.具体工作任务的达成；2.激励团队成员，使其处于良好的精神状态；3.辅导锻炼团队成员，提升团队战斗力。</p>
+</li>
+<li><p>高阶领导不是比下属做得好，而是比下属想得透。</p>
+</li>
+<li><p>好的领导知道我们在哪，知道我们到底在干啥；</p>
+</li>
+<li><p>通则观其所礼，贵则观其所进，富则观其所养，听则观其所行，止则观其所好，习则观其所言，穷则观其所不受，贱则观其所不为。</p>
+</li>
+<li><p>AISAS模型：Attention(引起注意) I:Interest(引起兴趣) S:Search(进行搜索) A:Action(行动) S:Share(分享)</p>
+</li>
+<li><p>谁敢问我下一卷什么时候出，我就再杀死一个史塔克。</p>
+</li>
+<li><p>人们总会把最大的慷慨放在一边，去找更好的。</p>
+</li>
+<li><p>当我们想做的更好时，先要向自己学习，让错误减少，让对的做得更好。</p>
+</li>
+<li><p>谁道人生无再少，门前流水尚能西。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>喜剧作家既要使其人物经受地狱般的折磨，又要使观众确信，那些飘忽的火焰实际上并不烫人。</p>
+</li>
+<li><p>领导需要的能力：勾绘蓝图的能力，让人追随的能力，实现梦想与抱负的能力。</p>
+</li>
+<li><p>领导力不是权利，而是影响力，来]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月9日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/09/20150409%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/09/20150409乔木阅读记录/</id>
+    <published>2015-04-09T03:55:08.000Z</published>
+    <updated>2015-04-24T06:16:29.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>不要用战术的勤奋，来掩盖战略上的失败。 </p>
+</li>
+<li><p>帮助孩子把书当成朋友，把书当成玩具的一种。</p>
+</li>
+<li><p>竭尽所能使用各种方法培养孩子对书和阅读的兴趣。不要因为任何事情打断，干扰，破坏孩子阅读的兴趣。 </p>
+</li>
+<li><p>《中国好声音》的热播恰恰证明了，精良的流水线娱乐产品一定会受到热捧，但它一定要接地气要不玩高贵冷艳。</p>
+</li>
+<li><p>成长就是一个不断意识到过去的自己是个傻逼的过程。</p>
+</li>
+<li><p>在社交网络上期待收获的即便不是赞同，那也是积极性的回应。</p>
+</li>
+<li><p>第一次世界大战，是欧洲民族主义酝酿的最终的出路。 </p>
+</li>
+<li><p>第二次世界大战是自由世界、共产主义世界和法西斯世界的意识形态冲突的开始。 </p>
+</li>
+<li><p>玩耳机越来越深入，就越來越不能沉浸于音乐本身。</p>
+</li>
+<li><p>IBM 360 是第一台可以升级的计算机，花了50亿美金研发费用，是原子弹研发经费的一半 。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>不要用战术的勤奋，来掩盖战略上的失败。 </p>
+</li>
+<li><p>帮助孩子把书当成朋友，把书当成玩具的一种。</p>
+</li>
+<li><p>竭尽所能使用各种方法培养孩子对书和阅读的兴趣。不要因为任何事情打断，干扰，破坏孩子阅读的兴趣。 </p]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月8日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/08/20150408%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/08/20150408乔木阅读记录/</id>
+    <published>2015-04-08T03:55:08.000Z</published>
+    <updated>2015-04-24T06:18:06.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>分享学到的知识可以让你印象更深刻。</p>
+</li>
+<li><p>从别人的错误中学习，脑中犯的错越多现实中越少。</p>
+</li>
+<li><p>微笑释放的化学物质对紧张和愤怒极有效。</p>
+</li>
+<li><p>给大脑足够时间来处理信息，不要在难点上过多停留。</p>
+</li>
+<li><p>不要长时间连续学习: 每个人的精力是有限，并非一定长时间学习效果就好。</p>
+</li>
+<li><p>把你经常用的句子、地址、邮箱等加入输入法自定义词库中。</p>
+</li>
+<li><p>不要太相信记忆力，要勤做笔记，记录下来的东西要定期整理，消化。</p>
+</li>
+<li><p>野心（梦想、希望）+好习惯=优秀</p>
+</li>
+<li><p>乐观构想、悲观计划、乐观执行。</p>
+</li>
+<li><p>眼睛可以眺望高空，双脚却必须踏在地上。</p>
+</li>
+<li><p>优秀的人自我燃烧、同时把能量传递给周围的人。</p>
+</li>
+<li><p>品牌运作，各种市场活动的前提是，不能偏离产品属性。</p>
+</li>
+<li><p>要看到临门一脚之外的兢兢业业，看到功成名就背后的隐忍琐碎。</p>
+</li>
+<li><p>修改是写作的本质。</p>
+</li>
+<li><p>如果你没有把「自己」放到那些写出的文字里面，它们就是毫无意义的。</p>
+</li>
+<li><p>通信和社交是全集和子集的关系，通信包含社交，社交是通信的一种特定场景。</p>
+</li>
+<li><p>如果把产品设计的重点太过聚焦于交互和视觉层面，则难免因小失大。</p>
+</li>
+<li><p>产品定位、产品形态、产品架构最根本和紧要的问题，它们决定一个产品的生死。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>分享学到的知识可以让你印象更深刻。</p>
+</li>
+<li><p>从别人的错误中学习，脑中犯的错越多现实中越少。</p>
+</li>
+<li><p>微笑释放的化学物质对紧张和愤怒极有效。</p>
+</li>
+<li><p>给大脑足够时间来处理信息，不要]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月7日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/07/20150407%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/07/20150407乔木阅读记录/</id>
+    <published>2015-04-07T03:55:08.000Z</published>
+    <updated>2015-04-24T06:19:32.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>消费级产品的主要盈利模式 1.向用户收费 2.向广告商收费</p>
+</li>
+<li><p>犹豫买不买的东西，就不买；犹豫做不做的事情，就去做。</p>
+</li>
+<li><p>极简主义生活方式的最终目标：通过简化节省精力，灌注到值得专注的地方去。</p>
+</li>
+<li><p>对学习新事物永远抱着儿童式的激情。</p>
+</li>
+<li><p>人类除了基本生存的需求外，没有广泛意义上的高频刚需，只有某些高频场景下的高频刚需。</p>
+</li>
+<li><p>根据自身的特长、环境、兴趣，去做好身边的每一件事。</p>
+</li>
+<li><p>圆滑只是被包装过、精致的利己主义。</p>
+</li>
+<li><p>刻意练习的任务难度要适中、能收到反馈、有足够次的重复。</p>
+</li>
+<li><p>用做阅读理解的方式来读文章，慢读深思后总结提炼。</p>
+</li>
+<li><p>21世纪五大元学科：1、网络科学；2、认知&amp;神经&amp;心理科学；3、编程；4、数学；5、文艺创作。</p>
+</li>
+<li><p>美国创造学家A·F·奥斯本于1939年首次提出“头脑风暴”。</p>
+</li>
+<li><p>要收获好的点子，首先要获得很多点子。</p>
+</li>
+<li><p>懒有时不是真懒，只是一种体力上的统筹术。</p>
+</li>
+<li><p>罗尔夫斯在1974年研究电话网络时发现，“一个用户从通信服务所获得的效用随着加入这一系统的人数而增加”。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>消费级产品的主要盈利模式 1.向用户收费 2.向广告商收费</p>
+</li>
+<li><p>犹豫买不买的东西，就不买；犹豫做不做的事情，就去做。</p>
+</li>
+<li><p>极简主义生活方式的最终目标：通过简化节省精力，灌注到值得专注的地方去。</]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月6日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/06/20150406%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/06/20150406乔木阅读记录/</id>
+    <published>2015-04-06T03:55:08.000Z</published>
+    <updated>2015-04-24T06:22:33.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>一个混迹于时尚行业的人，和一个宅男，所感知到的性感也是完全不同的。</p>
+</li>
+<li><p>成功的合伙人多是已有深厚交情的同学或朋友，至少是曾经共事的同伴。</p>
+</li>
+<li><p>最快速最低成本的确定市场需求，完善产品，其核心是对需求真伪的探索。</p>
+</li>
+<li><p>两次点击原则，即一旦用户打开App，则可通过两次点击完成所有想做的事。</p>
+</li>
+<li><p>程序员多数崇尚知识共享与代码开源，这有益于提高人类的生活质量与文明。</p>
+</li>
+<li><p>如果你需要为你的设计作出解释，那么这个设计是失败的。</p>
+</li>
+<li><p>新事物必将代替旧事物，道路是曲折的，但是前途是光明的。</p>
+</li>
+<li><p>必须让孩子认识到成人不喜欢的不是“我”，而是“我所做的行为”。</p>
+</li>
+<li><p>“求同存异”是个非常好的谈判策略。</p>
+</li>
+<li><p>在焦虑的时候，用自我认可和其他精神上的支点来对冲缓和。</p>
+</li>
+<li><p>害怕跟别人一样，又害怕跟别人不一样。</p>
+</li>
+<li><p>悲剧负责以一种警示性、现实性力量提醒我们生活的真相。</p>
+</li>
+<li><p>漂泊本身并不能让人成长，但可以促进我们不断变化视角，蕴含着整合和重生的可能。</p>
+</li>
+<li><p>Hype3是制作H5动画的好工具。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>一个混迹于时尚行业的人，和一个宅男，所感知到的性感也是完全不同的。</p>
+</li>
+<li><p>成功的合伙人多是已有深厚交情的同学或朋友，至少是曾经共事的同伴。</p>
+</li>
+<li><p>最快速最低成本的确定市场需求，完善产品，其核心是对需求]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月5日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/05/20150405%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/05/20150405乔木阅读记录/</id>
+    <published>2015-04-05T03:55:08.000Z</published>
+    <updated>2015-04-24T06:49:02.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>想赚1000万，也要从给用户带来1块钱价值的事情做起。</p>
+</li>
+<li><p>用户的第一印象非常重要：首页、着陆页、注册、登录、客服等所有跟用户首次接触的地方都要注意。</p>
+</li>
+<li><p>喜欢主动买单的人不是因为钱多，而是因为把友情看的比金钱重要。</p>
+</li>
+<li><p>工作时愿意多做的人不是因为傻，而是懂得承担责任。</p>
+</li>
+<li><p>吵架后先道歉的人不是因为错，而是懂得珍惜身边的人。</p>
+</li>
+<li><p>愿意帮助你的人不是因为欠你什么，而是把你当真朋友。</p>
+</li>
+<li><p>要像谈恋爱一样去跟用户打交道：注意第一印象，获得第一次的好感；</p>
+</li>
+<li><p>需要Review上周团队人员的工作完成情况，没完成的是否遇到什么阻力需要帮助。</p>
+</li>
+<li><p>在客户评价里面增加情绪选项，就像给客户面前摆了一面镜子，让他能看清自己的表情，自然会镇定自己的情绪。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>想赚1000万，也要从给用户带来1块钱价值的事情做起。</p>
+</li>
+<li><p>用户的第一印象非常重要：首页、着陆页、注册、登录、客服等所有跟用户首次接触的地方都要注意。</p>
+</li>
+<li><p>喜欢主动买单的人不是因为钱多，而是因为把]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月4日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/04/20150404%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/04/20150404乔木阅读记录/</id>
+    <published>2015-04-04T03:55:08.000Z</published>
+    <updated>2015-04-24T06:27:50.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>想参加武林大会，想喝侠客岛的那碗“腊八粥”，你就得先混个掌门当当。</p>
+</li>
+<li><p>岭深常得蛟龙在，梧高自有凤凰栖。</p>
+</li>
+<li><p>MVT（Minimum Viable Target）:制定一个简单到可以一直坚持下去的目标.</p>
+</li>
+<li><p>提升专心致志的能力和在无路可走时选择最佳路线的能力。</p>
+</li>
+<li><p>专注于目标，然后力求实现，不再为过去曾有或者将来可能会有的错误而担心、懊恼。</p>
+</li>
+<li><p>切合实际地不断思考未来的人成功概率更高。</p>
+</li>
+<li><p>五十元的人民币设计的再好看，也不如一百元招人喜欢。</p>
+</li>
+<li><p>中国人好像都是刻意回避思考未来的。</p>
+</li>
+<li><p>在一个动荡不息的大环境里，“长远思考”的基因是不利于生存的。</p>
+</li>
+<li><p>从风险投资的角度来看，那些依赖非商业关系的项目都是极其危险的。</p>
+</li>
+<li><p>个人成长和商业成长的重要区别在于前者更少偶然。</p>
+</li>
+<li><p>像天使投资人一样寻找自己的雇员。</p>
+</li>
+<li><p>什么人是潜力股：有强烈好奇心；自学能力强；不断造新东西；有独立思考能力；方法论明晰；价值观坚定</p>
+</li>
+<li><p>无论多风光的互联网产品,一但从网络中消失几天,就可能成为了历史。</p>
+</li>
+<li><p>垄断者谎称竞争激烈，非垄断者谎称自己一家独大。</p>
+</li>
+<li><p>公司需要确定一个最能反映产品用户增长质量和规模的指标。</p>
+</li>
+<li><p>营销的重点不是产品的最忠实用户，而是可能接受也可能退出的边缘用户。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>想参加武林大会，想喝侠客岛的那碗“腊八粥”，你就得先混个掌门当当。</p>
+</li>
+<li><p>岭深常得蛟龙在，梧高自有凤凰栖。</p>
+</li>
+<li><p>MVT（Minimum Viable Target）:制定一个简单到可以一直坚持下去的]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月3日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/03/20150403%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/03/20150403乔木阅读记录/</id>
+    <published>2015-04-03T03:55:08.000Z</published>
+    <updated>2015-04-24T06:28:58.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>幸福最核心的词是来自于你的成就感。</p>
+</li>
+<li><p>不断读书、不断交友、不断游走外面的世界，气质慢慢就起来了。</p>
+</li>
+<li><p>嘻哈艺术家既渴望成为艺术大师，也渴望成为当红偶像。</p>
+</li>
+<li><p>一些貌似合理的方案的存在就是为了在焦虑不安的员工心中燃起希望之火。</p>
+</li>
+<li><p>先考虑自己最关心的人，再考虑自己。</p>
+</li>
+<li><p>一生你需要两类朋友：遇到好事时真心为你喜悦的朋友；深陷困境时可以倾述、分担的朋友。</p>
+</li>
+<li><p>只要有足够多的眼睛，就可让所有问题浮出水面。</p>
+</li>
+<li><p>创业最重要的三件事儿：产品、产品、产品。</p>
+</li>
+<li><p>团队成长最重要的三件事儿：文化、文化、文化。</p>
+</li>
+<li><p>运营最重要的三件事儿：手动、手动、手动。</p>
+</li>
+<li><p>创业成功最重要的三件事儿：垄断、垄断、垄断。</p>
+</li>
+<li><p>创业最不重要的三件事儿：营销、营销、营销。</p>
+</li>
+<li><p>甘地：信仰决定思想，思想决定措辞，措辞决定行动，行动决定习惯，习惯决定价值观，价值观决定命运。</p>
+</li>
+<li><p>很多的公司只不过是假装有文化。</p>
+</li>
+<li><p>为了自己的美好生活，请远离那些没有任何特长的人。</p>
+</li>
+<li><p>创业时，合伙人和第一批员工最好都是传教士而不是雇佣兵。</p>
+</li>
+<li><p>高智商都是学出来的，天生的那点智商撑不了多久。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>幸福最核心的词是来自于你的成就感。</p>
+</li>
+<li><p>不断读书、不断交友、不断游走外面的世界，气质慢慢就起来了。</p>
+</li>
+<li><p>嘻哈艺术家既渴望成为艺术大师，也渴望成为当红偶像。</p>
+</li>
+<li><p>一些貌]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月2日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/02/20150402%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/02/20150402乔木阅读记录/</id>
+    <published>2015-04-02T03:55:08.000Z</published>
+    <updated>2015-04-24T06:31:01.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>人倾向于用自己信任的体系来解释所有事情。当你手里有一把锤子的时候，看什么都像钉子。</p>
+</li>
+<li><p>在企业里建立爱学习、爱分享的氛围，尤其要树立一些榜样人物。</p>
+</li>
+<li><p>认知行业与认知环境是管理层的本职工作。</p>
+</li>
+<li><p>地球上平均每50秒钟就有1人死于交通事故.</p>
+</li>
+<li><p>以”天“为单位更能刺激人的行动力。</p>
+</li>
+<li><p>睡眠的功能有：帮助伤口愈合、记忆巩固、大脑发育、清除代谢垃圾、调节荷尔蒙等。</p>
+</li>
+<li><p>在一定范围之内，唤醒水平越高，越利于完成简单的任务，而对于较难的任务，则需要相对较低的唤醒水平。</p>
+</li>
+<li><p>唤醒水平就是你身体内的应激代谢水平，俗话说就是你够不够High。</p>
+</li>
+<li><p>“惊”是最容易获得听众好奇心的元素。</p>
+</li>
+<li><p>找到多数人所不能解决却为之困惑苦恼的问题，提供简单有效的解决方案。</p>
+</li>
+<li><p>给自己找事儿做，给他人制造惊喜。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>人倾向于用自己信任的体系来解释所有事情。当你手里有一把锤子的时候，看什么都像钉子。</p>
+</li>
+<li><p>在企业里建立爱学习、爱分享的氛围，尤其要树立一些榜样人物。</p>
+</li>
+<li><p>认知行业与认知环境是管理层的本职工作。</p]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（4月1日）]]></title>
+    <link href="http://xiexiefa.com/2015/04/01/20150401%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/04/01/20150401乔木阅读记录/</id>
+    <published>2015-04-01T03:55:08.000Z</published>
+    <updated>2015-04-24T06:32:44.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>得到都是侥幸，失去的都是人生。</p>
+</li>
+<li><p>真心喜欢过的人没法做朋友，因为再多看几眼，都还是想拥有。</p>
+</li>
+<li><p>所谓新鲜感，不是和未知的人一起去做同样的事情，而是和已知的人一起去体验未知的人生。</p>
+</li>
+<li><p>牛人的努力是因为路径依赖，普通人的不努力是因为习得性无助。</p>
+</li>
+<li><p>我们坚持一件事情，并不是因为这样做了会有效果，而是坚信，这样做是对的。</p>
+</li>
+<li><p>没有一个平台支撑的创新是走不远的。</p>
+</li>
+<li><p>一辆车从生产出来95%的时间在停车状态，只有5%在开（美国数据）。</p>
+</li>
+<li><p>有的时候新的商业模式和新的组织模式很可能比底层的新科技本身创造更大的价值。</p>
+</li>
+<li><p>人们应该将更多的时间花在事情本身，而不是寻找事情的解决方案。</p>
+</li>
+<li><p>文章必须具有“可扫描性”才能更好地吸引读者。</p>
+</li>
+<li><p>即便在碎片化的时间里，人们依然期待成体系地分享知识。</p>
+</li>
+<li><p>不要被信息洪流淹到窒息。</p>
+</li>
+<li><p>让自己变慢脚步，看看你的四周，关注生活中的细微之处。</p>
+</li>
+<li><p>想变得开心的话，选择和乐观的朋友在一起。</p>
+</li>
+<li><p>大脑在运作的时候，我们就不大会想不开心心的事情。</p>
+</li>
+<li><p>简单的嘴巴上扬也可以增加你的幸福感。</p>
+</li>
+<li><p>向那些让你生活变好的人表达出你的欣赏之情。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>得到都是侥幸，失去的都是人生。</p>
+</li>
+<li><p>真心喜欢过的人没法做朋友，因为再多看几眼，都还是想拥有。</p>
+</li>
+<li><p>所谓新鲜感，不是和未知的人一起去做同样的事情，而是和已知的人一起去体验未知的人生。</p>
+</l]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月31日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/31/20150331%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/31/20150331乔木阅读记录/</id>
+    <published>2015-03-31T03:55:08.000Z</published>
+    <updated>2015-04-24T06:33:59.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>忠于个人的都是蠢货，应该忠于制度。</p>
+</li>
+<li><p>失败是什么？我们只有成功和暂未成功。</p>
+</li>
+<li><p>员工培训的切入点是岗位存在感。</p>
+</li>
+<li><p>妄念就是一个自己挥之不去，但又必须依靠他人才能够实现的愿望。</p>
+</li>
+<li><p>自由主义：有自己的立命之处，永远不向外追求妄念。</p>
+</li>
+<li><p>宗教是组织化资源最厉害的一种方式。</p>
+</li>
+<li><p>专注于当下，是破除纠结最好的法门。</p>
+</li>
+<li><p>为人处世切忌“目光远大”，一定要“鼠目寸光”，把当下该办的办好。</p>
+</li>
+<li><p>未来不迎，当时不杂，过往不恋。</p>
+</li>
+<li><p>一切伟大的世界历史事件和人物，都出现了两次，一次作为悲剧，一次作为闹剧，</p>
+</li>
+<li><p>南丁格尔是护士这一职业的创始人。</p>
+</li>
+<li><p>办大事者，以多选替手为第一义。</p>
+</li>
+<li><p>不切实际的想法常常更美妙。</p>
+</li>
+<li><p>一个文化的艺术风格其实取决于那个地区的原材料供应。</p>
+</li>
+<li><p>风险洋葱理论：创业公司会遇到一层层的各种风险，管理风险，团队风险，收入风险，技术风险，增长性风险。</p>
+</li>
+<li><p>成功的关键就是「优秀到让人无法忽视」。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>忠于个人的都是蠢货，应该忠于制度。</p>
+</li>
+<li><p>失败是什么？我们只有成功和暂未成功。</p>
+</li>
+<li><p>员工培训的切入点是岗位存在感。</p>
+</li>
+<li><p>妄念就是一个自己挥之不去，但又必须依靠他人才能够]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月30日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/30/20150330%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/30/20150330乔木阅读记录/</id>
+    <published>2015-03-30T03:55:08.000Z</published>
+    <updated>2015-04-24T06:42:18.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>创始人在公司会有一种很奇怪的道德优势。</p>
+</li>
+<li><p>最好的情况是，每个人看到公司的计划，觉得这是我写的。</p>
+</li>
+<li><p>苹果公司一直在不断改善并突破人机交互的体验和方式。</p>
+</li>
+<li><p>从对目标影响的角度找出值得做的，想想哪些你想做的，然后取个交集。</p>
+</li>
+<li><p>OKR考核：”我要做的事“，KPI考核：”要我做的事“。</p>
+</li>
+<li><p>情怀的兴起多数源于核心科技的衰败。</p>
+</li>
+<li><p>你来人间一趟,你要看看太阳.</p>
+</li>
+<li><p>席克定律：选项增多，做出决定的时间就会增加。</p>
+</li>
+<li><p>优秀的产品运营不在于把一堆数据分析的头头是道，而在于找到一个关键数值并把它做到极致。</p>
+</li>
+<li><p>贴标签是人类运用“模式识别”认识世界的方式，往往片面。</p>
+</li>
+<li><p>基于大数据分析来作出决策，这将不可避免地改变我们思考世界的方式。</p>
+</li>
+<li><p>竞争对手永远是自己，永远是上一次，这样你才能一直前进。</p>
+</li>
+<li><p>发现自己的问题时，欣喜若狂还是启动防御模式由你决定。</p>
+</li>
+<li><p>不要等待下一个「指示」，自己找到各种可能性，自己探路。</p>
+</li>
+<li><p>没有任务的时候主动寻找任务，有任务的时候主动补充细节，在力所能及的情况下主动帮助他人。</p>
+</li>
+<li><p>学会善于发现别人的优点及自己的缺点。</p>
+</li>
+<li><p>做过的东西，看过的东西，需要条理的进行归纳，整理，形成知识积累。</p>
+</li>
+<li><p>责任越大，沟通能力占比越大，沟通的复杂度也在递增。</p>
+</li>
+<li><p>做事一定要争取远远超过别人对你的期望。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>创始人在公司会有一种很奇怪的道德优势。</p>
+</li>
+<li><p>最好的情况是，每个人看到公司的计划，觉得这是我写的。</p>
+</li>
+<li><p>苹果公司一直在不断改善并突破人机交互的体验和方式。</p>
+</li>
+<li><p>从对目标]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月29日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/29/20150329%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/29/20150329乔木阅读记录/</id>
+    <published>2015-03-29T03:55:08.000Z</published>
+    <updated>2015-04-24T06:43:56.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>沟通就是两个人的心里模型的交换或者统一.</p>
+</li>
+<li><p>一个成功的沟通应该是“合作建模”的过程，在建造，维持和使用模型上进行合作。</p>
+</li>
+<li><p>任何让世界变得更好的都是集体合作的结果。</p>
+</li>
+<li><p>好的目标就是是对未来有一个清晰的认知，然后为这个未来而努力。</p>
+</li>
+<li><p>只了解他自己那一代的人永远是个小孩。</p>
+</li>
+<li><p>门捷列夫在梦中发现了元素周期表的结构，但突破性的想法几乎从不来自于瞬间的灵感，此前需要沉淀。</p>
+</li>
+<li><p>Alan Kay：预测未来的最好办法是创造未来。</p>
+</li>
+<li><p>愿景是可以通过学习专业知识，学习历史不断的完善和清晰化。</p>
+</li>
+<li><p>互联网真正让个人的声音被听到的时代还没有到来。</p>
+</li>
+<li><p>好的互联网产品可以给我们的生活带来方便，让再顽固的产业也会变得更加透明和平等。</p>
+</li>
+<li><p>TED演讲多数是“创新”安慰剂、灵感“毛片”。</p>
+</li>
+<li><p>如果这还是个木头人，我要给他注入灵魂，那我应该干什么？</p>
+</li>
+<li><p>要想让产品有趣、招人喜欢，你自己就要做一个“招人喜欢的人”，“有趣的人”。</p>
+</li>
+<li><p>所谓的“重生”就是从一个世界一脚跨入另外一个世界。</p>
+</li>
+<li><p>类比思考几乎是跨越已知与未知之间的鸿沟的唯一手段。</p>
+</li>
+<li><p>读杂书会大大提高一个人的接受新事物的能力，容易从已有的知识中找到可以类比的信息。</p>
+</li>
+<li><p>成就斐然的人都会费尽心机去研究、寻找趋势。</p>
+</li>
+<li><p>找到一个必然迅猛发展的趋势，在那个领域里迅猛地学习、实践，与趋势共同成长。</p>
+</li>
+<li><p>在听他人讲话时，关注于他讲的内容，暂时放下自己已有的知识和看法，听完后再思考、筛选过滤。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>沟通就是两个人的心里模型的交换或者统一.</p>
+</li>
+<li><p>一个成功的沟通应该是“合作建模”的过程，在建造，维持和使用模型上进行合作。</p>
+</li>
+<li><p>任何让世界变得更好的都是集体合作的结果。</p>
+</li>
+<li>]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月28日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/28/20150328%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/28/20150328乔木阅读记录/</id>
+    <published>2015-03-28T03:55:08.000Z</published>
+    <updated>2015-04-24T06:49:12.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>转化和流失之间就是增长，减少客户流失比增长新用户来的要容易的多。</p>
+</li>
+<li><p>雇你喜欢的人，可以让你每天都想一起工作的人。</p>
+</li>
+<li><p>超过15分钟的事情都要拿到会议上去专门讨论。</p>
+</li>
+<li><p>获取新用户就像约会追女孩，留住老用户就像成功的婚姻。</p>
+</li>
+<li><p>精心制作每个帮助页面，让用户出现问题时候能轻易找到精确的帮助。</p>
+</li>
+<li><p>最实用的占领市场的方法：1.最好的价格 2.最好的产品 3.最好的整体解决方案</p>
+</li>
+<li><p>每个人都参与当客服，敦促大家一起改进问题，优化产品和内部工具。</p>
+</li>
+<li><p>满意的用户愿意给更多的建议和称赞（包括钱），舒心的团队更倾向于服务好用户和做出更好的产品。</p>
+</li>
+<li><p>对待产品不能仅仅满足于做到“基本可用”，而要做到“有魅力”，让用户发自内心喜爱产品。</p>
+</li>
+<li><p>“CEO轮值法”可以让团队成员从宏观上理解公司的核心业务，一天内调动所有公司资源做出他认为激动人心的功能。</p>
+</li>
+<li><p>一个产品从不了解到熟练掌握之间有很长的距离，但只要让用户更快上手达到基本熟练就可以。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>转化和流失之间就是增长，减少客户流失比增长新用户来的要容易的多。</p>
+</li>
+<li><p>雇你喜欢的人，可以让你每天都想一起工作的人。</p>
+</li>
+<li><p>超过15分钟的事情都要拿到会议上去专门讨论。</p>
+</li>
+<li><]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月27日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/27/20150327%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/27/20150327乔木阅读记录/</id>
+    <published>2015-03-27T03:55:08.000Z</published>
+    <updated>2015-04-24T06:50:28.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>设计师需要去挖掘那些本应该天然关联的事物，让它们更好地为生活服务。</p>
+</li>
+<li><p>调查并不总是能够得到正确的答案，人们总会有意无意地将自己描述成希望变成的样子。</p>
+</li>
+<li><p>设计不是一种技能，而是捕捉事物本质的感觉能力和洞察能力。</p>
+</li>
+<li><p>当你觉得老板是傻瓜的时候，他其实只是在抉择要如何平衡矛盾。</p>
+</li>
+<li><p>只有这个东西不得不做，才是正经的创业理由。</p>
+</li>
+<li><p>大多数成功的公司在创业初期就有一个明确的目标。</p>
+</li>
+<li><p>没有清晰的目标，你很难让一群人专心、高效地工作。</p>
+</li>
+<li><p>创立一家公司的痛苦，需要想法本身带来的使命感抵御。</p>
+</li>
+<li><p>如果有很多创业想法在脑中徘徊，选择出现频率最高的那个。</p>
+</li>
+<li><p>一个好的主意一开始看起来可能非常不靠谱。</p>
+</li>
+<li><p>好的想法能用一句话简单的话解释清楚。</p>
+</li>
+<li><p>规模小但迅速扩张中的市场要好过一个规模大却发展缓慢的市场。</p>
+</li>
+<li><p>创业者需要一个把用户反馈转化成产品的机制。</p>
+</li>
+<li><p>产品要简单点再简单点。</p>
+</li>
+<li><p>公司招聘了员工，员工定义了公司，员工对公司的信心非常重要。</p>
+</li>
+<li><p>留住人才从根本上就是要让员工开心，并感受到公司对他的重视。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>设计师需要去挖掘那些本应该天然关联的事物，让它们更好地为生活服务。</p>
+</li>
+<li><p>调查并不总是能够得到正确的答案，人们总会有意无意地将自己描述成希望变成的样子。</p>
+</li>
+<li><p>设计不是一种技能，而是捕捉事物本质的感觉]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月26日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/26/20150326%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/26/20150326乔木阅读记录/</id>
+    <published>2015-03-26T03:55:08.000Z</published>
+    <updated>2015-04-24T06:51:42.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>大多数人相信X，但事实却是X的对立面。你能想到几条？</p>
+</li>
+<li><p>用户点击和分享了，都不一定代表阅读了。</p>
+</li>
+<li><p>广告在人视野里停留的时间越长，效果越好。</p>
+</li>
+<li><p>互联网广告好坏不能只停留在点击量和转发量，还应该考虑用户花费的时间和精力。</p>
+</li>
+<li><p>Cohort Retention Rate指的是每月你获取的用户在随后月份里的留存率，可以看出产品改进带来的粘性变化效果。</p>
+</li>
+<li><p>多数人背单词永远都在背“abandon”，十年如一日。</p>
+</li>
+<li><p>像追妹子一样追新用户，像伺候老婆一样伺候老用户。</p>
+</li>
+<li><p>陌生人之间的第一印象是很脆弱的。</p>
+</li>
+<li><p>注册密码提示语：“写你记得住又不容易猜的数字与字母组合”。</p>
+</li>
+<li><p>反馈驱动开发（SDD）,通过用户的反馈改进产品，每个开发人员都是客服人员。</p>
+</li>
+<li><p>给产品增加新特性，多数时候意味着增加了用户使用产品的难度。</p>
+</li>
+<li><p>用户数增长是流失率和留存率共同作用的结果，要同样重视。</p>
+</li>
+<li><p>人类之间的感情是遵循热力学第二定律的，会自然消散，需要不断的注入新鲜的活力。</p>
+</li>
+<li><p>告诉用户他不在的时候，网站又多了什么新功能。</p>
+</li>
+<li><p>在实力差不多的创业团队里，应该推行人人可以“当一天国王”的规矩。</p>
+</li>
+<li><p>当用户需求强烈到可以忍受产品的缺点的时候，可能就是“刚需”了吧。</p>
+</li>
+<li><p>公关不要盲目，先找到正确的人群。</p>
+</li>
+<li><p>让故事更有阅读性的一个技巧就是找到一个独特的角度。</p>
+</li>
+<li><p>一个人在你身上花的时间成本越大，他对你的重视程度就越高。</p>
+</li>
+<li><p>CEO最重要的工作是描述清晰的愿景，为此制定战略和招聘符合企业文化的员工。</p>
+</li>
+<li><p>一个产品真正的成功不是看公关，而是看用户数、使用频次，以及大家喜爱程度。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>大多数人相信X，但事实却是X的对立面。你能想到几条？</p>
+</li>
+<li><p>用户点击和分享了，都不一定代表阅读了。</p>
+</li>
+<li><p>广告在人视野里停留的时间越长，效果越好。</p>
+</li>
+<li><p>互联网广告好坏不能]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月25日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/25/20150325%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/25/20150325乔木阅读记录/</id>
+    <published>2015-03-25T03:55:08.000Z</published>
+    <updated>2015-04-24T06:52:47.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>OKR和KPI的区别，区别就在于KPI只能让驴使劲走，而OKR用于保证驴头朝正确的方向。</p>
+</li>
+<li><p>一定要了解对方的想法，只有了解了，才有可能去转变对方的想法。</p>
+</li>
+<li><p>在你一天工作结束时，或在周末时，列出你第二天要做的每一件事的清单，并结合ABCDE法则和80/20原则审视。</p>
+</li>
+<li><p>ABCDE时间管理法则：A类代表非常重要而且完不成后果严重的事；B类代表需要去做完不成后果不太严重的事 C类代表愿意做，但做与不做都没后果。 D类代表可以交给别人做的事；E类代表可以完全取消，可做可不做的事。</p>
+</li>
+<li><p>有人的地方就有江湖，有江湖的地方就有武林盟主，群红（群里红人）就是实际的盟主，要靠近拉拢。</p>
+</li>
+<li><p>养成习惯是一个「技能」</p>
+</li>
+<li><p>懒是一个很好的托辞，说得好像勤快了就真的能干出什么大事。</p>
+</li>
+<li><p>生活会让你苦上一阵子，等你适应后，再让你苦上一辈子。</p>
+</li>
+<li><p>电子写作要点：尽量使用简短的语句；使用可扫描的布局（分类，多层标题、项目符号列表）；用朴素客观的语言；</p>
+</li>
+<li><p>推销不需要看起来像广告，给用户一些使用服务或者留在网站的合理、客观的理由。</p>
+</li>
+<li><p>工作和生活都忙的时候，找到真实的内心平和。</p>
+</li>
+<li><p>大理想是逃避现实的完美解决方案，小理想是躲也躲不掉的现实。</p>
+</li>
+<li><p>一个产品的传播性可以从三个维度来分析：1.覆盖面 2.宣传频次 3.转化率。</p>
+</li>
+<li><p>找到自己产品的心动时刻。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>OKR和KPI的区别，区别就在于KPI只能让驴使劲走，而OKR用于保证驴头朝正确的方向。</p>
+</li>
+<li><p>一定要了解对方的想法，只有了解了，才有可能去转变对方的想法。</p>
+</li>
+<li><p>在你一天工作结束时，或在周末时，列出]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月24日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/24/20150324%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/24/20150324乔木阅读记录/</id>
+    <published>2015-03-24T03:55:08.000Z</published>
+    <updated>2015-04-24T06:53:51.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>研究表明我们的短期记忆最多只能放四件事情。</p>
+</li>
+<li><p>学习时间不宜太长；分散时间学习；重要的知识点或问题多进行随意联想。</p>
+</li>
+<li><p>尽可能使用不同感官学习，练习也是一种多感学习，所以越多越好。</p>
+</li>
+<li><p>锻炼身体对大脑生长新的神经元并保持脑健康很重要。</p>
+</li>
+<li><p>应对拖延的方法就是忍住不快和痛苦，立刻全身心投入工作一小段时间。</p>
+</li>
+<li><p>给自己定一个短期的目标,然后驱使自己的动力,一步一步完成。</p>
+</li>
+<li><p>即便是最优秀的人，也需要不断激励才能做得更好。</p>
+</li>
+<li><p>目标要有意义，要可衡量，要有难度且显示可行。</p>
+</li>
+<li><p>用企业成长速度快不快来判断转型时机。</p>
+</li>
+<li><p>学很多值得学的东西，仔细琢磨你感兴趣的日常生活中的痛点，多与牛人在一起。</p>
+</li>
+<li><p>肯于学习、善于学习的人，一定表现为拥有强烈的好奇心，而不断学习也是保持强烈的好奇心唯一有效方式。</p>
+</li>
+<li><p>如果你真的能做到精通你的用户，那你做出来的东西一定有很多人爱到死。</p>
+</li>
+<li><p>一切能够满足人性弱点的产品都是令用户热爱的。</p>
+</li>
+<li><p>人与人之间的兴奋沸点不一样，容易兴奋的人必须给自己设置一个方式过滤掉不必要的兴奋。</p>
+</li>
+<li><p>发现并感受飞速成长的东西是年轻人比老年人更有经验的领域。</p>
+</li>
+<li><p>勇于承担责任的人有个共同的特征，出了问题的时候，他们会先在自己身上找问题。</p>
+</li>
+<li><p>所谓的洗脑，很多时候就是欺负人家读书太少。</p>
+</li>
+<li><p>没有“上火”，就是“炎症”。</p>
+</li>
+<li><p>懂得长期持续做事的人，通常不笨，也通常没办法做不好那件事儿。</p>
+</li>
+<li><p>所谓思考，很大程度上，就是在建立那些概念与概念之间的关联。</p>
+</li>
+<li><p>那些时不时自言自语的不全都是精神病患者。</p>
+</li>
+<li><p>学习知识或技能是身体进行特定的神经连接，搭建神经网络的过程。</p>
+</li>
+<li><p>多种感官的刺激让学习效果更好。因为那样子的神经连接更丰富, 更稳固。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>研究表明我们的短期记忆最多只能放四件事情。</p>
+</li>
+<li><p>学习时间不宜太长；分散时间学习；重要的知识点或问题多进行随意联想。</p>
+</li>
+<li><p>尽可能使用不同感官学习，练习也是一种多感学习，所以越多越好。</p>
+</l]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月23日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/23/20150323%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/23/20150323乔木阅读记录/</id>
+    <published>2015-03-23T03:55:08.000Z</published>
+    <updated>2015-04-24T06:56:22.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>如果你没有把「自己」放到那些写出的文字里面，它们就是毫无意义的。</p>
+</li>
+<li><p>你的价值取决于那些来参加你葬礼的人究竟是真心怀念你，还是出于政治正确的考量。</p>
+</li>
+<li><p>李彦宏：我觉得风口论，包括猪论，是充满了投机思维的这么一个方向。</p>
+</li>
+<li><p>以用户需求为导向，用产品来塑造品牌。</p>
+</li>
+<li><p>智能手机革命性地拓宽了个人计算机设备的领域，每时每刻都触手可及。</p>
+</li>
+<li><p>鼠标和水泥携手合作才能找到一个方法让互联网经济和实体经济能够结合。</p>
+</li>
+<li><p>不是科技改变了世界，是科技背后的梦想改变了世界。</p>
+</li>
+<li><p>假如你看不清未来，那就做好现在。</p>
+</li>
+<li><p>对于简单的运动，只要50小时练习时间就能达到非常熟练的水平。</p>
+</li>
+<li><p>一旦测试变得频繁，它就成为熟悉的事物，就不再是令人畏惧的大事。</p>
+</li>
+<li><p>去尝试自己惧怕的事物，让别人提供快速、积极的反馈，以帮你树立信心。</p>
+</li>
+<li><p>想成为爆品，你就得具备唯一性。</p>
+</li>
+<li><p>一个热门新闻，第一个爆出来的一定最受益，行业术语叫抢新闻、抢热点。</p>
+</li>
+<li><p>新媒体运营一般要交给内容部/运营部。</p>
+</li>
+<li><p>不同客户群对刚需的定义是不同的。</p>
+</li>
+<li><p>行业的不同发展阶段对刚需的定义是不同的。</p>
+</li>
+<li><p>抛开客户细分和行业阶段谈刚需没有意义。</p>
+</li>
+<li><p>千万不要把解决某个客户需求的产品形态误认为是用户需求。</p>
+</li>
+<li><p>需求来自人类的本能和欲望，它是永恒不变的，而解决需求的产品形态则始终都在变化之中，它是一个相对的概念，产品形态随它服务的人群和行业的发展阶段而变</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>如果你没有把「自己」放到那些写出的文字里面，它们就是毫无意义的。</p>
+</li>
+<li><p>你的价值取决于那些来参加你葬礼的人究竟是真心怀念你，还是出于政治正确的考量。</p>
+</li>
+<li><p>李彦宏：我觉得风口论，包括猪论，是充满了投机]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月22日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/22/20150322%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/22/20150322乔木阅读记录/</id>
+    <published>2015-03-22T03:55:08.000Z</published>
+    <updated>2015-04-24T09:43:32.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>创业选定行业之后该做什么？成为专家。</p>
+</li>
+<li><p>如何讲述一个话题：先说问题在哪里，再描述解决方案。</p>
+</li>
+<li><p>完善固然需要高素质的人才来做，但开拓的事情往往由某些“野蛮人”来完成。</p>
+</li>
+<li><p>讨论的目的在于获取更多的优质信息，而非说服。</p>
+</li>
+<li><p>在科学领域，困难的不是回答问题而是提出问题。</p>
+</li>
+<li><p>在一个创业公司的早期，提供密切的客户服务非常值得，因为这是一种了解用户的好方法。</p>
+</li>
+<li><p>所谓惊喜其实就是随机性，没有随机性，游戏就没有耐玩性。</p>
+</li>
+<li><p>一些原本你觉得难以克服的东西，在你坚持了一段时间之后你会发现，一切都不是你想象中的那么苦，那么难。</p>
+</li>
+<li><p>营造一个包容的工作环境，那些员工稍一犯错，就会被骂、被罚的企业，员工几乎没有自信可言。</p>
+</li>
+<li><p>一分钟完全可以做出一件高收益、长半衰期的事情来。</p>
+</li>
+<li><p>好书应该至少读两遍，第一遍用来理解，第二遍用来强力研读。</p>
+</li>
+<li><p>移动端不适合内容产出及缺少搜索引擎入口，注定互动是优先于内容的。</p>
+</li>
+<li><p>分享就是打“情感”牌，用户才懒得去追究，你丫的是不是利用了我的骄傲感？</p>
+</li>
+<li><p>在朋友圈分享文章的本质多数是借原作者之口，说出自己的心声。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>创业选定行业之后该做什么？成为专家。</p>
+</li>
+<li><p>如何讲述一个话题：先说问题在哪里，再描述解决方案。</p>
+</li>
+<li><p>完善固然需要高素质的人才来做，但开拓的事情往往由某些“野蛮人”来完成。</p>
+</li>
+<li]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月21日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/21/20150321%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/21/20150321乔木阅读记录/</id>
+    <published>2015-03-21T03:55:08.000Z</published>
+    <updated>2015-04-24T09:55:39.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>主流用户使用你的产品不是因为技术，目的是为了完成某项任务。</p>
+</li>
+<li><p>好的产品让用户感到自己在掌控一切。</p>
+</li>
+<li><p>用户希望的体验：易用、掌控全局、不被打扰、轻松自在。</p>
+</li>
+<li><p>故事五要素：人、目的、行为、环境、媒介。</p>
+</li>
+<li><p>简化产品方法：1.删除不必要的功能字段 2. 组合相似内容，突出重点的内容，隐藏必要但不常用的功能 3.在合适的时机出现恰当的功能。</p>
+</li>
+<li><p>产品设计小细节：1.适当的默认值 2.尽量少让用户做选择 3.不要过多错误提示 4.不强制用户填写结构化数据，程序判断引导。</p>
+</li>
+<li><p>新奇的东西是以奇取胜，所以新奇的东西不一定好，而好的艺术永远新奇。</p>
+</li>
+<li><p>如果想要药物快速地发挥作用，可以考虑饭前服用。对胃刺激性较大的药物，应在饭后服用。作用于胃肠道的药物，最好饭前服用。</p>
+</li>
+<li><p>即使你是在复制粘贴，也要去思考，在复制粘贴的过程中，你能学到什么。</p>
+</li>
+<li><p>分析客户的真正问题，而不是盲目的给产品添加功能，导致真问题被掩盖。</p>
+</li>
+<li><p>专注，对每一种可行的推广方案至少专注数周的时间。</p>
+</li>
+<li><p>思考问题的本质：真问题是什么？这个问题跟我有什么关系，这个问题是否也困扰着其他人。</p>
+</li>
+<li><p>创业公司如果成长速度不快，那就要小心了。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>主流用户使用你的产品不是因为技术，目的是为了完成某项任务。</p>
+</li>
+<li><p>好的产品让用户感到自己在掌控一切。</p>
+</li>
+<li><p>用户希望的体验：易用、掌控全局、不被打扰、轻松自在。</p>
+</li>
+<li><p>故事]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月20日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/20/20150320%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/20/20150320乔木阅读记录/</id>
+    <published>2015-03-20T03:55:08.000Z</published>
+    <updated>2015-04-24T09:57:20.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>不能给用户提供足够的导购信息是目前B2B的硬伤。</p>
+</li>
+<li><p>“听”清楚问题，“看”清楚局面，是解决问题的关键所在。</p>
+</li>
+<li><p>观察的目的是为了认知，洞察的目的是为了看清本质。</p>
+</li>
+<li><p>用户的潜意思需求才是产品真正的购买动机。</p>
+</li>
+<li><p>产品是用来与消费者交换的；品牌是用来与消费者进行沟通的。</p>
+</li>
+<li><p>AIDMA法则：A（Attention）引起注意；I（Interest）产生兴趣；D（Desire）培养欲望；M（Memory）形成记忆；A（Action）促成行动。</p>
+</li>
+<li><p>如何请教高手？先交代问题产生的背景、原因、做了哪些尝试、导致了什么结果，然后提出自己想要解决的问题或结果。</p>
+</li>
+<li><p>社会热点事件运营可通过策划与热点相关的内容、活动、专题等方式引起用户的关注度、好感度，属于情感化运营的一种。</p>
+</li>
+<li><p>和用户想到一起去，替用户说想说的话，给用户一个释放情感的入口。</p>
+</li>
+<li><p>任务清单的作用是帮你把长期目标化作短期目标，同时释放了你大脑的内存。</p>
+</li>
+<li><p>买入耳式耳机套一定要注意看导管直径，2.7-3.5mm常见于动铁耳机。</p>
+</li>
+<li><p>设计四原则：亲密度、对齐、对比、重复。</p>
+</li>
+<li><p>“成功学”的核心思想：只要努力，就能成功；“心灵鸡汤”的核心思想：只要想得开，成功与否无所谓。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>不能给用户提供足够的导购信息是目前B2B的硬伤。</p>
+</li>
+<li><p>“听”清楚问题，“看”清楚局面，是解决问题的关键所在。</p>
+</li>
+<li><p>观察的目的是为了认知，洞察的目的是为了看清本质。</p>
+</li>
+<li><p]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月19日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/19/20150319%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/19/20150319乔木阅读记录/</id>
+    <published>2015-03-19T03:55:08.000Z</published>
+    <updated>2015-04-24T10:05:12.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>需求采集阶段，不但要听用户怎么说，还要看用户怎么做。</p>
+</li>
+<li><p>没有故事的地点终究是冰冷的。</p>
+</li>
+<li><p>大部分人都是想想远方，然后就去忙现实中的苟且了。</p>
+</li>
+<li><p>小生意就是用来解决问题，产生收益，甚至从第一天开始就有利润了，不需要太大投资，也不需要承受太大风险。</p>
+</li>
+<li><p>所有的经历都是好事，所有的教训更是上天给的礼物。</p>
+</li>
+<li><p>在一天的最开始就完成那些最艰难最重要的工作。</p>
+</li>
+<li><p>让自己“看起来像个专家”非常的简单，找到那个领域的“圈内人”网站，“快速学习”就可以。</p>
+</li>
+<li><p>勤奋是一种态度，专注是一种品质，专注甚至比勤奋更加重要。</p>
+</li>
+<li><p>专注，就是要不受到来自外界的干扰，同时，不受到来自自己内心的扰动。</p>
+</li>
+<li><p>忘掉技术，千万不要堆砌技术参数自我满足；千万不要教育用户，要降低用户的学习成本。</p>
+</li>
+<li><p>只有简单的规则，才可以演化出非常复杂的事情。</p>
+</li>
+<li><p>每增加一个功能，都会带来长期的产品维护成本，要慎重。</p>
+</li>
+<li><p>人生就是一个B到D的过程。从Birth to Death（从生到死）只有一次，但中间的C，Choice（机会）却有很多次。</p>
+</li>
+<li><p>如果你的问题错了，就永远没有正确答案。</p>
+</li>
+<li><p>你的产品解决谁的什么问题？这类人群的痛点、痒点是什么，你解决了没有？</p>
+</li>
+<li><p>腾讯的“10／100／1000”理论：每个产品经理每个月必须做10个用户调查，关注100个用户博客，收集反馈1000个用户体验。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>需求采集阶段，不但要听用户怎么说，还要看用户怎么做。</p>
+</li>
+<li><p>没有故事的地点终究是冰冷的。</p>
+</li>
+<li><p>大部分人都是想想远方，然后就去忙现实中的苟且了。</p>
+</li>
+<li><p>小生意就是用来解决问]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月18日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/18/20150318%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/18/20150318乔木阅读记录/</id>
+    <published>2015-03-18T03:55:08.000Z</published>
+    <updated>2015-04-24T10:05:54.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>「简约」的本质，不在于用了什么元素，而是：减轻了我们的认知负担。</p>
+</li>
+<li><p>喜悦或欢乐只要有人分享，快乐的程度就会更加扩大。</p>
+</li>
+<li><p>家亚里士多德：所谓习惯就是不停重覆的动作。</p>
+</li>
+<li><p>养成挑战新事物的习惯，发觉自身才华的机会也会随之增加。</p>
+</li>
+<li><p>再忙也要每天抽出三小时左右，完全用在研读或自己的兴趣上。</p>
+</li>
+<li><p>珍惜有缘相逢的所有人、事、物。</p>
+</li>
+<li><p>就算面对累死人的工作，也不应该长吁短叹，多想像完成后的成就感。</p>
+</li>
+<li><p>分享就是打“情感”牌，用户才懒得去追究，你丫的是不是利用了我的骄傲感？</p>
+</li>
+<li><p>一个好故事能不断牵着你的鼻子走，因为它本身就包含了“简单”、“意外”、“具体”、“可信”和“情感”这些能让创意更具粘性的要点。</p>
+</li>
+<li><p>把用户当作傻瓜，不要让用户思考和选择，缺省的设置应该就是最佳设置。</p>
+</li>
+<li><p>培养习惯可以按着由少到多，由易到难的原则来进行，不要在一开始就追求完美。</p>
+</li>
+<li><p>分享的动机:可以是竞争，可以是炫耀；可以是有趣的或吸引眼球的；可以是表明自己态度、立场的。</p>
+</li>
+<li><p>在朋友圈分享文章的本质多数是借原作者之口，说出自己的心声。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>「简约」的本质，不在于用了什么元素，而是：减轻了我们的认知负担。</p>
+</li>
+<li><p>喜悦或欢乐只要有人分享，快乐的程度就会更加扩大。</p>
+</li>
+<li><p>家亚里士多德：所谓习惯就是不停重覆的动作。</p>
+</li>
+<li>]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月17日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/17/20150317%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/17/20150317乔木阅读记录/</id>
+    <published>2015-03-17T03:55:08.000Z</published>
+    <updated>2015-04-24T10:06:35.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>谁不想成为懂美学的牛顿、懂人类学的梵谷、懂孙子兵法的甘地。</p>
+</li>
+<li><p>共谋，是指双方做一件只有你们两个才理解的事情，其他人都不懂。</p>
+</li>
+<li><p>不应只看到眼前的一个功能，更需要全局意识。</p>
+</li>
+<li><p>多抬抬头，时常想想自己该做什么、目标是什么、计划是什么。</p>
+</li>
+<li><p>所谓“以终为始”，就是先考虑到产品未来的形态以及适用的“情境模式”，然后再根据“未来的形态”进行有针对性的研发。</p>
+</li>
+<li><p>当事实对你有利时，多强调事实；当法律对你有利时，多强调法律；当事实和法律都对你不利时，敲桌子把事情搅浑。</p>
+</li>
+<li><p>能够把简单的事情想复杂。使你具备执行力；能够把复杂的事情想简单。使你具备操控局面的能力。</p>
+</li>
+<li><p>把问题逐级分类，每步都尽量考虑到所有方面，最终形成一个树形图。</p>
+</li>
+<li><p>不要把不同功能的按钮设计得一样，摆得太近。</p>
+</li>
+<li><p>如果是竞争品，不要妄想扭转用户的使用习惯；如果是新品，不要跟用户的思维作对。</p>
+</li>
+<li><p>古腾堡图表——用户浏览网页的视线轨迹是从左上到右下的对角线，左下和右上是用户的视线盲点，不要放置重要的信息或功能。</p>
+</li>
+<li><p>以B比A更差来反对改变A，是没有想象力的表现，这个世界上还有CDEF…</p>
+</li>
+<li><p>态度决定行为，行为也会更加坚定你的态度，所以知行合一很重要。</p>
+</li>
+<li><p>乐观的心态和人的寿命是正相关的，所以大家要天天快乐</p>
+</li>
+<li><p>先承认对方讲得有道理，然后再讲自己的理由与优势，谈判很忌讳伤对方的自尊；</p>
+</li>
+<li><p>当一个系统很复杂，看不清楚其中的逻辑关系时，就用极限法。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>谁不想成为懂美学的牛顿、懂人类学的梵谷、懂孙子兵法的甘地。</p>
+</li>
+<li><p>共谋，是指双方做一件只有你们两个才理解的事情，其他人都不懂。</p>
+</li>
+<li><p>不应只看到眼前的一个功能，更需要全局意识。</p>
+</li>
+<]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[乔木阅读记录（3月16日）]]></title>
+    <link href="http://xiexiefa.com/2015/03/16/20150316%E4%B9%94%E6%9C%A8%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://xiexiefa.com/2015/03/16/20150316乔木阅读记录/</id>
+    <published>2015-03-16T03:55:08.000Z</published>
+    <updated>2015-04-24T10:07:26.000Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li><p>你说你有好技术，人家有好人脉啊；你说你有好体验，人家有好渠道啊；你说你有种子用户，腾讯分分钟群发个广告用户超你几百倍。</p>
+</li>
+<li><p>创业是一件厚积薄发的事情，年轻还是要多学习，少看 36Kr，少看创业课，多学学实际的，比如：写代码、做设计、画线框图，别老总想搞个大新闻。</p>
+</li>
+<li><p>“可理解输入”学习方法比传统学习方法效果更好。</p>
+</li>
+<li><p>5个学习外语的原则：1.从和你有密切关系的外语内容学起 2.将外语当作你的沟通工具 3.理解了含义，自然能获取语言 4.以生理训练为主 5.掌握好心理状态</p>
+</li>
+<li><p>如何讲述一个话题：先说问题在哪里，再描述解决方案。</p>
+</li>
+<li><p>介绍产品时，需要从用户的角度去思考，产品的特性会给用户带来什么好处？省钱还是省事？</p>
+</li>
+<li><p>完善固然需要高素质的人才来做，但开拓的事情往往由某些“野蛮人”来完成。</p>
+</li>
+<li><p>喜欢不断的揣测对方说的话的潜台词，在一定程度上来说是没有安全感的表现。</p>
+</li>
+<li><p>儒释道的核心观念没有神的参与，他们面临的是怎样处理与神的关系的问题。</p>
+</li>
+<li><p>一个创业公司，不能都活在梦想里，至少得有一个人，要活在现实里，为了现实而工作，这个倒霉孩子，一般都是所谓的CEO。</p>
+</li>
+<li><p>活动文案用简洁的文字，没人喜欢看长篇大论。少用八股文风格。</p>
+</li>
+<li><p>运营活动不限于各种形式，君子善假于物。一招鲜吃遍天的时代早就过去了。</p>
+</li>
+<li><p>重农抑商政策对中国传统文化的影响：1.讲究积蓄，在意存粮，以节俭为美。2.年长者受敬重。3.人口流动不算频繁 4.重视乡邻关系，对外地人普遍冷淡。5.推崇扎实肯干的，鄙弃耍心思的。</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li><p>你说你有好技术，人家有好人脉啊；你说你有好体验，人家有好渠道啊；你说你有种子用户，腾讯分分钟群发个广告用户超你几百倍。</p>
+</li>
+<li><p>创业是一件厚积薄发的事情，年轻还是要多学习，少看 36Kr，少看创业课，多学学实际的，比如：写代码、做]]>
+    </summary>
+    
+      <category term="阅读记录" scheme="http://xiexiefa.com/tags/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+</feed>
