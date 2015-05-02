@@ -137,7 +137,7 @@ body,
   height: 100%;
 }
 body {
-  font-family: "微软雅黑", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Hiragino Sans GB, "微软雅黑", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   background: #fff;
   color: rgba(0,0,0,0.6);
@@ -960,7 +960,7 @@ a {
   margin-top: 12px;
   font-size: 16px;
   color: #888;
-  font-family: serif;
+  font-family: Hiragino Sans GB, Microsoft Yahei, serif;
 }
 .article-entry p code,
 .article-entry li code {
@@ -982,6 +982,8 @@ a {
 }
 .article-entry blockquote p {
   margin-top: 0;
+  font-size: 16px;
+  line-height: 35px;
 }
 .article-entry em {
   font-style: italic;
