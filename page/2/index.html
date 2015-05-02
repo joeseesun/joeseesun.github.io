@@ -122,7 +122,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 10px;">github</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/技术/" style="font-size: 10px;">技术</a><a href="/tags/阅读记录/" style="font-size: 20px;">阅读记录</a>
+						<a href="/tags/git/" style="font-size: 10px;">git</a><a href="/tags/github/" style="font-size: 15px;">github</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/技术/" style="font-size: 10px;">技术</a><a href="/tags/阅读记录/" style="font-size: 20px;">阅读记录</a>
 					</div>
 				</section>
 				
@@ -156,6 +156,85 @@
 		</div>
 	</nav>
       <div class="body-wrap">
+  
+    <article id="post-用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/24/用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么/" class="article-date">
+  	<time datetime="2015-04-23T16:22:15.000Z" itemprop="datePublished">2015-04-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/24/用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么/">用Github搭建自己的带域名博客步骤要点</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>先注册个GitHub账号，<a href="http://www.github.com" target="_blank" rel="external">http://www.github.com</a></p>
+</li>
+<li><p>在github上新建一个库，注意格式：username.github.io,username就是你的github用户名，只有建立这样的库才可以。</p>
+</li>
+<li><p>本地电脑安装Nodejs和Git，安装hexo命令 <code>npm install hexo -g</code></p>
+</li>
+<li><p>在电脑上建个文件夹，然后运行命令<code>hexo init</code>，然后运行<code>npm install</code></p>
+</li>
+<li><p>输入<code>hexo s</code>,本地的博客就搭建好了，访问地址 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可。</p>
+</li>
+<li><p>写文章命令 <code>hexo n &quot;标题名&quot;</code>，会自动在Source文件夹下的_post文件夹下建一个md格式的文档，用sublime打开编辑。</p>
+</li>
+<li><p>修改根目录下的_config.yml文件，配置git发布地址，博客名称等信息。</p>
+<blockquote>
+<p>deploy:<br> type: github<br> repository: <a href="https://github.com/username/usernmae.github.io.git" target="_blank" rel="external">https://github.com/username/usernmae.github.io.git</a><br> branch: master</p>
+</blockquote>
+</li>
+</ol>
+<ol>
+<li><p>运行命令 <code>hexo d</code>就发布到github了。</p>
+</li>
+<li><p>为了支持域名绑定，需要在source目录下建一个名字叫 CNAME的文件，里面写上你要绑定的域名，比如我的 <a href="http://xiexiefa.com" target="_blank" rel="external">xiexiefa.com</a>,域名那边只需要建一个CNAME记录，指向 username.github.io(不要加http://)</p>
+</li>
+<li><p>这样博客就搭建好了。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-20150423乔木阅读记录" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -849,88 +928,6 @@
 <li><p>生有涯而知无涯，以有涯逐无涯，殆矣。</p>
 </li>
 <li><p>知识根本不需要对“成功”负责，需要为“成功”负责的是技能。而知识，却能让我们活的更有味道。</p>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阅读记录/">阅读记录</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-20150414乔木阅读记录" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/14/20150414乔木阅读记录/" class="article-date">
-  	<time datetime="2015-04-14T03:55:08.000Z" itemprop="datePublished">2015-04-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/14/20150414乔木阅读记录/">乔木阅读记录（4月14日）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>大多数人对细节的反感, 是因为大方向没有搞清楚。</p>
-</li>
-<li><p>管理公司比开发产品困难，因为代码是有逻辑的，而人却常常失去理智。</p>
-</li>
-<li><p>管理者就像编辑，首要任务是精简问题，消除”歧义”，整合资源。</p>
-</li>
-<li><p>做一个重要的决定时，要从各方的角度去考虑。</p>
-</li>
-<li><p>能被人记住通常是一件荣耀的事。</p>
-</li>
-<li><p>可以拿走一个人的职位，但是不要拿走他的尊严。</p>
-</li>
-<li><p>应该把各个学科的基础理论拿来思考所有重要的问题。</p>
-</li>
-<li><p>当你在表扬一部分人时实际上就是在批评剩下的另一部分人。</p>
-</li>
-<li><p>产品有三种价值：使用价值、体验价值、传播价值。</p>
-</li>
-<li><p>FAB理论：Feature（特点）、Advantages（优点），Benifit（利益点）</p>
-</li>
-<li><p>科学研究表明有效到达数4次，就能让受众记住。</p>
-</li>
-<li><p>幽默亲切拉近人与人的距离，使用场景拉近人与产品的距离，争议拉近人与事件的距离、共鸣拉近人与品牌的距离。</p>
-</li>
-<li><p>垄断、专利、规模、品牌、低成本、高效率、现实扭曲力都是成功公司的护城河。</p>
-</li>
-<li><p>最常见的情商低的表现，就是小看或低估其他人的情商。</p>
 </li>
 </ul>
 

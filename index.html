@@ -122,7 +122,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/github/" style="font-size: 10px;">github</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/技术/" style="font-size: 10px;">技术</a><a href="/tags/阅读记录/" style="font-size: 20px;">阅读记录</a>
+						<a href="/tags/git/" style="font-size: 10px;">git</a><a href="/tags/github/" style="font-size: 15px;">github</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/技术/" style="font-size: 10px;">技术</a><a href="/tags/阅读记录/" style="font-size: 20px;">阅读记录</a>
 					</div>
 				</section>
 				
@@ -156,6 +156,174 @@
 		</div>
 	</nav>
       <div class="body-wrap">
+  
+    <article id="post-Git命令学习记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/02/Git命令学习记录/" class="article-date">
+  	<time datetime="2015-05-02T07:12:09.000Z" itemprop="datePublished">2015-05-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/02/Git命令学习记录/">Git命令学习记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Git学习">Git学习</h2><h3 id="安装完成后的配置命令：">安装完成后的配置命令：</h3><blockquote>
+<p>$ git config —global user.name “Your Name”<br>$ git config —global user.email “email@example.com”</p>
+</blockquote>
+<h3 id="小贴士：">小贴士：</h3><blockquote>
+<p>ls -ah 显示隐藏文件夹.git命令</p>
+<p>git diff HEAD — filename 查看工作区的版本与最新版本库版本的文件区别</p>
+<p>git reset即可回退版本，也可以把暂存区的修改退回到工作区，用HEAD时表示最新版本。</p>
+<p>Git跟踪的是修改而不是文件。</p>
+<p>创建SSH的操作命令：<br>ssh-keygen -t rsa -C “youremail@example.com”<br>生成位置在用户主目录下的.ssh文件夹下，有id_rsa 和 id_ras.pub两个文件。</p>
+<p>git remote add origin git@github.com:yougithubusername/youreponame.git 添加远程库<br>如果第一次往空的github推送，推送命令 git push -u origin master让本地库与远程建立关联，以后可以去掉-u参数。</p>
+<p>查看远程分支详情命令  <code>git remote -v</code>,会显示远程库的完整访问地址，而不是名称.</p>
+<p><code>git config --global color.ui true</code>  可以让git显示语法高亮。</p>
+<p><code>.gitignore</code>用于忽略某些文件和文件夹，支持通配符。目录结尾斜杠不能省略，否则就是忽略文件。</p>
+</blockquote>
+<h3 id="Git版本恢复">Git版本恢复</h3><blockquote>
+<p>git reset —hard head^   恢复到上个版本</p>
+<p>git reset —hard head^^  恢复到上上个版本 </p>
+<p>git reset —hard commit_id   恢复到某个版本</p>
+<p>git reflog  记录所有的命令历史，便于恢复到任意版本</p>
+<p>git log —pretty=oneline  记录历史commit，方便恢复到某个commit版本。</p>
+</blockquote>
+<h3 id="Git的操作流">Git的操作流</h3><blockquote>
+<p>git add filename -&gt;  git commit -m “description” -&gt; git push origin master</p>
+</blockquote>
+<h3 id="Git的工作方式理解（个人理解）">Git的工作方式理解（个人理解）</h3><ul>
+<li><p>直接能看到的文件所在区叫“工作区”。</p>
+</li>
+<li><p><code>./git</code>里的是版本库，包含了暂存区和Head版本区</p>
+</li>
+<li><p>每次<code>git add</code> 是为了把工作区的文件放到暂存区跟踪版本。</p>
+</li>
+<li><p>每次<code>git commit</code> 是为了把暂存区的内容放到真正的版本区里。</p>
+</li>
+<li><p>每次<code>git push</code> 是为了把本地的代码推上线</p>
+</li>
+</ul>
+<h3 id="Git完整操作流程测试">Git完整操作流程测试</h3><ol>
+<li><p>本地建个文件夹 justtest.</p>
+</li>
+<li><p>进入文件夹后输入  <code>git init</code> 初始化本地仓库。</p>
+</li>
+<li><p>vi test.md 创建个文件随便输入点东西。<code>:wq!</code>保存退出。</p>
+</li>
+<li><p><code>git add test.md</code> </p>
+</li>
+<li><p><code>git commit -m &quot;justtest&quot;</code></p>
+</li>
+<li><p>Github建立一个空的库，比如我命名为<code>justtest</code>,生成的地址为：<code>git@github.com:joeseesun/justtest.git</code> </p>
+</li>
+<li><p>添加远程库  <code>git remote add origin git@github.com:joeseesun/justtest.git</code></p>
+</li>
+<li><p>推送本地库到远程：<code>git push -u origin master</code></p>
+</li>
+<li><p>打开github你的justtest仓库，应该就可以看到test.md文件。</p>
+</li>
+</ol>
+<h3 id="Git_分支操作">Git 分支操作</h3><ul>
+<li><p>查看分支 <code>git branch</code></p>
+</li>
+<li><p>创建分支 <code>git branch &lt;branchname&gt;</code></p>
+</li>
+<li><p>切换分支 <code>git checkout &lt;branchname&gt;</code></p>
+</li>
+<li><p>删除分支 <code>git branch -d &lt;branchname&gt;</code></p>
+</li>
+<li><p>合并其他分支到当前分支  <code>git merge &lt;branchname&gt;</code></p>
+</li>
+<li><p>创建并切换到新分支 <code>git checkout -b &lt;branchname&gt;</code></p>
+</li>
+<li><p>删除远程分支 <code>git push origin :&lt;branchname&gt;</code>  原理推一个空分支上去，相对于删除，冒号不能少。</p>
+</li>
+<li><p>强行删除未合并分支 <code>git branch -D &lt;branchname&gt;</code></p>
+</li>
+</ul>
+<h3 id="Git分支冲突合并">Git分支冲突合并</h3><ul>
+<li><p>如果新建的分支和主分支都做了修改并且commit，<code>git merge &lt;branchname&gt;</code>命令会造成文件冲突，必须修改后add和commit</p>
+</li>
+<li><p><code>git log --graph</code>可以查看分支合并图,<code>git log --pretty=oneline --graph --abbrev-commit</code> 显示更简洁的合并图。</p>
+</li>
+<li><p>git的默认使用fast-foward分支合并模式，缺点是删除分之后会丢掉分支历史信息。使用<code>--no-ff</code>参数可以禁用fast-foward模式。</p>
+</li>
+<li><p>如果修复bug，可以创建bug分支去处理，但是当前工作还没完成的情况下，可以使用<code>git stash</code>命令去记录当前分支的工作区。修复合并完bug分支后，在之前的工作区使用<code>git stash pop</code>来恢复工作区并删除快照（如果单独操作命令是 <code>git stash apply</code>,恢复命令是<code>git stash drop</code>）,查看工作区快照命令 <code>git stash list</code>。</p>
+</li>
+</ul>
+<h3 id="Git标签">Git标签</h3><ul>
+<li><p><code>git tag &lt;tagname&gt;</code>用于新建标签，默认为<code>HEAD</code>,也可以指定Commit id。</p>
+</li>
+<li><p><code>git tag -a &lt;tagname&gt; -m &quot;description&quot;</code>写标签信息</p>
+</li>
+<li><p><code>git show &lt;tagname&gt;</code> 来看具体tag的内容</p>
+</li>
+<li><p><code>git push origin &lt;tagname&gt;</code> 推送一个标签到远程</p>
+</li>
+<li><p><code>git push origin --tags</code> 推送所有标签到远程</p>
+</li>
+<li><p><code>git tag -d &lt;tagname&gt;</code> 本地删除一个标签</p>
+</li>
+<li><p><code>git push origin :refs/tags/&lt;tagname&gt;</code> 远程删除一个标签</p>
+</li>
+</ul>
+<h3 id="Git命令配置别名">Git命令配置别名</h3><ul>
+<li><p><code>git config --global alias.st status</code>  将<code>git status</code>简化为<code>git st</code>;</p>
+</li>
+<li><p><code>git config --global alias.ci commit</code>  将<code>git commit</code>简化为<code>git ci</code>;</p>
+</li>
+<li><p><code>git config --global alias.co checkout</code>  将<code>git checkout</code>简化为<code>git co</code>;</p>
+</li>
+<li><p><code>git config --global alias.br branch</code>  将<code>git branch</code>简化为<code>git br</code>;</p>
+</li>
+<li><p><code>git config --global alias.last &#39;log -1&#39;</code> 显示最近一次commit信息;</p>
+</li>
+<li><p><code>git config --global alias.unstage &#39;reset HEAD&#39;</code>  将<code>git reset HEAD</code>简化为<code>git unstage</code>;</p>
+</li>
+<li><p><code>git config --global alias.lg &quot;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&quot;</code>  图形分支图着色</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-20150501乔木阅读记录" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -811,85 +979,6 @@
         <p class="article-more-link">
           <a  href="/2015/04/24/Markdown语法学习记录/#more">more >></a>
         </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/04/24/用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么/" class="article-date">
-  	<time datetime="2015-04-23T16:22:15.000Z" itemprop="datePublished">2015-04-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/04/24/用Github搭建了一个自己的博客，以后尝试用Markdown格式写点什么/">用Github搭建自己的带域名博客步骤要点</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>先注册个GitHub账号，<a href="http://www.github.com" target="_blank" rel="external">http://www.github.com</a></p>
-</li>
-<li><p>在github上新建一个库，注意格式：username.github.io,username就是你的github用户名，只有建立这样的库才可以。</p>
-</li>
-<li><p>本地电脑安装Nodejs和Git，安装hexo命令 <code>npm install hexo -g</code></p>
-</li>
-<li><p>在电脑上建个文件夹，然后运行命令<code>hexo init</code>，然后运行<code>npm install</code></p>
-</li>
-<li><p>输入<code>hexo s</code>,本地的博客就搭建好了，访问地址 <a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a> 即可。</p>
-</li>
-<li><p>写文章命令 <code>hexo n &quot;标题名&quot;</code>，会自动在Source文件夹下的_post文件夹下建一个md格式的文档，用sublime打开编辑。</p>
-</li>
-<li><p>修改根目录下的_config.yml文件，配置git发布地址，博客名称等信息。</p>
-<blockquote>
-<p>deploy:<br> type: github<br> repository: <a href="https://github.com/username/usernmae.github.io.git" target="_blank" rel="external">https://github.com/username/usernmae.github.io.git</a><br> branch: master</p>
-</blockquote>
-</li>
-</ol>
-<ol>
-<li><p>运行命令 <code>hexo d</code>就发布到github了。</p>
-</li>
-<li><p>为了支持域名绑定，需要在source目录下建一个名字叫 CNAME的文件，里面写上你要绑定的域名，比如我的 <a href="http://xiexiefa.com" target="_blank" rel="external">xiexiefa.com</a>,域名那边只需要建一个CNAME记录，指向 username.github.io(不要加http://)</p>
-</li>
-<li><p>这样博客就搭建好了。</p>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-	</div>
-
-      
-
       
       <div class="clearfix"></div>
     </div>
