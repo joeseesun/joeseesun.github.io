@@ -129,30 +129,30 @@
 
             //动态显示数据
             var scrollHandle = function() {
-                var contHeight = container.height();
-                var contop;
-                if ($(window).get(0) === window) {
-                    contop = $(window).scrollTop();
-                } else {
-                    contop = container.offset().top;
-                }
-                $.each(opts.cache, function(i, data) {
-                    var o = data.obj, tag = data.tag, url = data.url, post, posb;
-                    if (o) {
-                        post = o.offset().top - contop, post + o.height();
+                // var contHeight = container.height();
+                // var contop;
+                // if ($(window).get(0) === window) {
+                //     contop = $(window).scrollTop();
+                // } else {
+                //     contop = container.offset().top;
+                // }
+                // $.each(opts.cache, function(i, data) {
+                //     var o = data.obj, tag = data.tag, url = data.url, post, posb;
+                //     if (o) {
+                //         post = o.offset().top - contop, post + o.height();
 
-                        if ((post >= 0 && post < contHeight) || (posb > 0 && posb <= contHeight)) {
-                            if (url) {
-                                //在浏览器窗口内
-                                if (tag === "img") {
-                                    //改变src
-                                    setSrc(o, srcSign, errCallBack);
-                                }
-                            }
-                            data.obj = null;
-                        }
-                    }
-                });
+                //         if ((post >= 0 && post < contHeight) || (posb > 0 && posb <= contHeight)) {
+                //             if (url) {
+                //                 //在浏览器窗口内
+                //                 if (tag === "img") {
+                //                     //改变src
+                //                     setSrc(o, srcSign, errCallBack);
+                //                 }
+                //             }
+                //             data.obj = null;
+                //         }
+                //     }
+                // });
             }
 
             //加载完毕即执行

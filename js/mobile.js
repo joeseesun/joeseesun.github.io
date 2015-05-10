@@ -144,7 +144,7 @@
 		    }
 		};
 		$header[0].addEventListener("touchstart", function(){
-			$('html, body').animate({scrollTop:0}, 'slow');
+			$('html, body').animate({scrollTop:0}, 'fast');
 		}, false);
 	};
 	

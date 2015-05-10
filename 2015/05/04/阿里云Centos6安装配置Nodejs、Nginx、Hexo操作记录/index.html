@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录 | 乔木记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前使用本地运行hexo，生成静态文件分发到Github和Gitcafe的玩法，也搭建了两个网站。 、 
+但是觉得每次都要使用hexo g &amp;amp;&amp;amp; hexo d命令生成静态然后分发很不方便，于是重装了自己的阿里云服务器，打算直接让hexo跑起来，体验写个Markdown文件就能生成博客的快感。
+怎么操作呢？
+
+阿里云重新安装，点击更换磁盘，虽然有很可怕的提示，但是不要管。一步步按流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录">
+<meta property="og:url" content="http://tuijiankan.com/2015/05/04/阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录/index.html">
+<meta property="og:site_name" content="乔木记录">
+<meta property="og:description" content="之前使用本地运行hexo，生成静态文件分发到Github和Gitcafe的玩法，也搭建了两个网站。 、 
+但是觉得每次都要使用hexo g &amp;amp;&amp;amp; hexo d命令生成静态然后分发很不方便，于是重装了自己的阿里云服务器，打算直接让hexo跑起来，体验写个Markdown文件就能生成博客的快感。
+怎么操作呢？
+
+阿里云重新安装，点击更换磁盘，虽然有很可怕的提示，但是不要管。一步步按流程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录">
+<meta name="twitter:description" content="之前使用本地运行hexo，生成静态文件分发到Github和Gitcafe的玩法，也搭建了两个网站。 、 
+但是觉得每次都要使用hexo g &amp;amp;&amp;amp; hexo d命令生成静态然后分发很不方便，于是重装了自己的阿里云服务器，打算直接让hexo跑起来，体验写个Markdown文件就能生成博客的快感。
+怎么操作呢？
+
+阿里云重新安装，点击更换磁盘，虽然有很可怕的提示，但是不要管。一步步按流程">
+  
+    <link rel="alternative" href="/atom.xml" title="乔木记录" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?cdd2232126bb36bb60c2290e69d7811e";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="http://tp1.sinaimg.cn/1620605960/180/40084509778/1" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">向阳乔木</a></h1> 
+		</hgroup>
+
+		
+		 <p class="header-subtitle">热爱分享，永远好奇，不添麻烦</p>
+		
+
+
+		<p style="margin-top:10px;"><script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=4492204797440219444' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script></p>
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://www.weibo.com/tuijiankan" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/qiaomu" title="zhihu">zhihu</a>
+					        
+								<a class="douban" target="_blank" href="http://www.douban.com/people/joeedeng/" title="douban">douban</a>
+					        
+								<a class="mail" target="_blank" href="mailto:85378058@qq.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DDos/" style="font-size: 15px;">DDos</a><a href="/tags/cdn/" style="font-size: 10px;">cdn</a><a href="/tags/centos/" style="font-size: 10px;">centos</a><a href="/tags/forever/" style="font-size: 10px;">forever</a><a href="/tags/git/" style="font-size: 10px;">git</a><a href="/tags/github/" style="font-size: 15px;">github</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/markdown/" style="font-size: 10px;">markdown</a><a href="/tags/nginx/" style="font-size: 10px;">nginx</a><a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a><a href="/tags/冰与火之歌/" style="font-size: 10px;">冰与火之歌</a><a href="/tags/创业课/" style="font-size: 10px;">创业课</a><a href="/tags/工作/" style="font-size: 10px;">工作</a><a href="/tags/技术/" style="font-size: 10px;">技术</a><a href="/tags/电脑狂人/" style="font-size: 10px;">电脑狂人</a><a href="/tags/美剧/" style="font-size: 15px;">美剧</a><a href="/tags/计划/" style="font-size: 10px;">计划</a><a href="/tags/阅读记录/" style="font-size: 20px;">阅读记录</a><a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a><a href="/tags/黑客攻击/" style="font-size: 15px;">黑客攻击</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.huangye88.com/">黄页88</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">锤子手机用户，窦唯脑残粉，金属乐爱好者，半吊子产品/前端/SEO</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav" style="margin-bottom:55px;">
+		<div class="overlay" style="height:44px;">
+			<div class="slider-trigger"></div>
+		</div>
+	</nav>
+      <div class="body-wrap"><article id="post-阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/04/阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录/" class="article-date">
+  	<time datetime="2015-05-03T17:22:17.000Z" itemprop="datePublished">2015-05-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前使用本地运行hexo，生成静态文件分发到Github和Gitcafe的玩法，也搭建了两个网站。<www.xiexiefa.com> 、 <www.topfrom.com></www.topfrom.com></www.xiexiefa.com></p>
+<p>但是觉得每次都要使用<code>hexo g &amp;&amp; hexo d</code>命令生成静态然后分发很不方便，于是重装了自己的阿里云服务器，打算直接让hexo跑起来，体验写个Markdown文件就能生成博客的快感。</p>
+<p>怎么操作呢？</p>
+<ol>
+<li><p>阿里云重新安装，点击更换磁盘，虽然有很可怕的提示，但是不要管。一步步按流程走，我选择安装了Centos6.5 64位操作系统。</p>
+</li>
+<li><p>运行Mac下的Terminal，输入 ssh root@yourdomain.com 访问。（如果以前访问过记录过rsa秘钥文件，记得删除掉，否则无法登录服务器）</p>
+</li>
+<li><p>进入系统后参考<a href="http://codybonney.com/installing-node-js-0-10-24-on-centos-6-4/" target="_blank" rel="external">http://codybonney.com/installing-node-js-0-10-24-on-centos-6-4/</a> 一步步安装开发工具和Nodejs。</p>
+</li>
+<li><p>按照这个教程安装Nginx：<a href="http://codybonney.com/installing-nginx-on-centos-6-4/" target="_blank" rel="external">http://codybonney.com/installing-nginx-on-centos-6-4/</a></p>
+</li>
+<li><p>使用Mac下的Sftp软件 YummyFTP上传本地hexo文件到服务器，目录随意，我使用的是  /home/hexo</p>
+</li>
+<li><p>因为本地是可以运行hexo的，但是传到服务器后，还需要全局安装Hexo,命令：<code>npm install -g hexo</code> ，然后运行<code>hexo s</code> 就可以通过 <a href="http://youdomain.com:4000" target="_blank" rel="external">http://youdomain.com:4000</a> 看到你的博客了。</p>
+</li>
+<li><p>但是不可能让用户通过加端口的名字去访问，所以需要设置nginx的反向代理，监听4000端口,default.conf文件内容如下。</p>
+<pre><code><span class="title">server</span> {
+    <span class="title">listen</span> <span class="number">80</span>;
+    <span class="title">server_name</span> yourdomian.com, www.youdomain.com;
+
+    <span class="title">location</span> / {
+        <span class="title">proxy_pass</span>              <span class="url">http://127.0.0.1:4000/</span>;
+        <span class="title">proxy_redirect</span>          <span class="built_in">off</span>;
+        <span class="title">proxy_set_header</span>        X-Real-IP       <span class="variable">$remote_addr</span>;
+        <span class="title">proxy_set_header</span>        X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;
+        }
+  }
+</code></pre></li>
+</ol>
+<p>之后重启nginx。</p>
+<ol>
+<li><p>让Hexo后台运行，命令  <code>hexo s &amp;</code>,这样就不会关掉terminal网站就打不开了。</p>
+</li>
+<li><p>以后写博客，可以在服务器运行  <code>hexo n &quot;title&quot;</code> 来生成空的markdown文件，然后敲博客就行了。 如果本地写好，用sftp往服务器传也可以。</p>
+</li>
+<li><p>竣工！睡觉~</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/04/明天的任务安排(20150504)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          明日任务安排（20150504）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/03/20150503乔木阅读记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">乔木阅读记录（2015年5月3日）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+    <div style="padding:30px">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- tuijiankan -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-2113546784212510"
+           data-ad-slot="1066639203"
+           data-ad-format="auto"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  
+</article>
+
+
+<div class="share">
+	<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_mshare" data-cmd="mshare" title="分享到一键分享"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录" data-title="阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录" data-url="http://tuijiankan.com/2015/05/04/阿里云Centos6安装配置Nodejs、Nginx、Hexo操作记录/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 向阳乔木
+    	</div>
+      	<div class="footer-right">
+      		
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

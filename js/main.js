@@ -117,7 +117,7 @@ var Main = (function(){
 		//article
 		function showArticle(){
 			$(".article").each(function(){
-				if( $(this).offset().top <= $(window).scrollTop()+$(window).height()*0.75 && !$(this).hasClass('show') ) {
+				if( $(this).offset().top <= $(window).scrollTop()+$(window).height()*1 && !$(this).hasClass('show') ) {
 					$(this).addClass("show");
 				}
 			});

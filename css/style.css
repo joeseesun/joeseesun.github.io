@@ -847,7 +847,6 @@ a {
   position: relative;
   border: 1px solid #ddd;
   background: #fff;
-  max-width: 1000px;
   visibility: hidden;
   -webkit-transition: all 0.2s ease-in;
 }
@@ -866,7 +865,7 @@ a {
 @-webkit-keyframes cd-bounce-1 {
   0% {
     opacity: 0;
-    -webkit-transform: scale(0.5);
+    -webkit-transform: scale(1);
   }
   60% {
     opacity: 1;
@@ -879,7 +878,7 @@ a {
 @-moz-keyframes cd-bounce-1 {
   0% {
     opacity: 0;
-    -moz-transform: scale(0.5);
+    -moz-transform: scale(1);
   }
   60% {
     opacity: 1;
@@ -967,7 +966,6 @@ a {
   padding: 1px 3px;
   margin: 0 3px;
   background: #ddd;
-  border: 1px solid #ccc;
   font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
   word-wrap: break-word;
   font-size: 14px;
@@ -1183,14 +1181,14 @@ a {
 @-moz-keyframes cd-bounce-1 {
   0% {
     opacity: 0;
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
   60% {
     opacity: 1;
@@ -1217,14 +1215,14 @@ a {
 @-webkit-keyframes cd-bounce-1 {
   0% {
     opacity: 0;
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
   60% {
     opacity: 1;
@@ -1251,14 +1249,14 @@ a {
 @-o-keyframes cd-bounce-1 {
   0% {
     opacity: 0;
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
   60% {
     opacity: 1;
@@ -1285,14 +1283,14 @@ a {
 @keyframes cd-bounce-1 {
   0% {
     opacity: 0;
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -moz-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    transform: scale(0.5);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
   60% {
     opacity: 1;
